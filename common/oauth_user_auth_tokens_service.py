@@ -12,7 +12,7 @@ class OAuthUserAuthTokensService:
     - DEFAULT_ACCESS_TOKEN_EXPIRY_IN_SECONDS: Default Oauth Token expiry (set this to 1000000000) for development purpose only.
 
     """
-    def __init__(self, oauth2_storage: OAuth2SQLStorage):
+    def __init__(self, oauth2_storage: object) -> object:
         self.oauth2_storage = oauth2_storage
 
     def create_user_auth_tokens(self, user_id):

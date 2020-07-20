@@ -18,6 +18,8 @@ from django_swagger_utils.drf_server.utils.general.import_app_settings import \
 
 THIRD_PARTY_APPS = []
 APPS = [
+    "lets_ride_auth",
+    "lets_ride"
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS
@@ -60,6 +62,8 @@ SWAGGER_UTILS = {
         }
     },
     "APPS": {
+        "lets_ride": {},
+        "lets_ride_auth": {}
     },
     "HOST": os.environ.get('APIGATEWAY_ENDPOINT', '127.0.0.1:8000'),
 }
