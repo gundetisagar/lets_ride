@@ -17,9 +17,9 @@ class PresenterInterface(abc.ABC):
     def login_response(self, tokens_dto: UserAuthTokensDto):
         pass
 
-    @abc.abstractmethod
-    def raise_exception_for_user_does_not_exist(self):
-        pass
+    # @abc.abstractmethod
+    # def raise_exception_for_user_does_not_exist(self):
+    #     pass
 
     # @abc.abstractmethod
     # def get_user_profile_response(self, user_profile_dto: UserDetailsDto):

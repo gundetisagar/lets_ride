@@ -24,7 +24,8 @@ ALLOWED_HOSTS = [
     "ib-miniprojects-backend-beta.apigateway.in",
     "ib-miniprojects-backend-gamma.apigateway.in",
     "127.0.0.1",
-    "localhost"
+    "localhost",
+    "*"
 ]
 
 ROOT_URLCONF = 'ib_miniprojects_backend.urls'

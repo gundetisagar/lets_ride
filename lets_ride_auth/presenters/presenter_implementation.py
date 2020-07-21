@@ -1,4 +1,4 @@
-from lets_ride.interactors.presenters.presenter_interface import \
+from lets_ride_auth.interactors.presenters.presenter_interface import \
     PresenterInterface
 from lets_ride_auth.constants.exception_messages import (
     INVALID_USERNAME,
@@ -28,18 +28,23 @@ class PresenterImplementation(PresenterInterface):
         import json
         data = json.dumps({
             "response": INVALID_PASSWORD[0],
-            "http_status_code": 404,
+            "http_status_code": 400,
             "res_status": INVALID_PASSWORD[1]
         })
-        response_object = response.HttpResponse(data, 404)
+        response_object = response.HttpResponse(data, 400)
         return response_object
 
-    def user_login_response(self, tokens_dto):
+    def login_response(self, tokens_dto) -> response.HttpResponse:
         login_access_dict = {
             "user_id": tokens_dto.user_id,
             "access_token": tokens_dto.access_token,
             "refresh_token": tokens_dto.refresh_token,
-            "expires_in": tokens_dto.expires_in
-
+            "expires_in": str(tokens_dto.expires_in)
         }
-        return login_access_dict
+        import json
+        data = json.dumps(login_access_dict)
+        response_object = response.HttpResponse(
+            data, 200
+        )
+
+        return response_object

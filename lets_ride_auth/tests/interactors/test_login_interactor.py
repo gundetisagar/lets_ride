@@ -66,19 +66,7 @@ def test_user_login_with_invalid_password():
     presenter.raise_exception_for_invalid_password.assert_called_once()
     assert response == mock_object
 
-
-from lets_ride_auth.dtos.dtos import UserAuthTokensDto
-
-
-@pytest.fixture()
-def user_auth_token_dto():
-    userauthdto = UserAuthTokensDto(
-        user_id=1,
-        access_token="12345",
-        refresh_token="54321",
-        expires_in=121313
-    )
-    return userauthdto
+from lets_ride_auth.tests.interactors.dtos import user_auth_token_dto
 
 
 @patch("common.oauth_user_auth_tokens_service.OAuthUserAuthTokensService.create_user_auth_tokens")
@@ -113,7 +101,6 @@ def test_user_login_interactor(token_mock, user_auth_token_dto):
     service = interactor.login_wrapper(username=username, password=password, presenter=presenter)
 
     # Assert
-    print(service)
     assert service == expected_dict
     oauth_storage.create_user_auth_tokens.assert_called_once_with(
         user_id=user_id

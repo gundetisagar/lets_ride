@@ -42,8 +42,11 @@
                     "200": {
                         "$ref": "#/responses/LoginResponse"
                     },
-                    "401": {
-                        "$ref": "#/responses/InvalidUsernameOrPasswordResponse"
+                    "404": {
+                        "$ref": "#/responses/InvalidUsernameResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/InvalidPasswordResponse"
                     }
                 }
             }
@@ -80,7 +83,7 @@
     },
     "responses": {
         "LoginResponse": {
-            "description": "suceessfully login and returns user_id, access_token, refresh_token, expires_in",
+            "description": "successfully login and returns user_id, access_token, refresh_token, expires_in",
             "schema": {
                 "type": "object",
                 "properties": {
@@ -107,8 +110,8 @@
                 ]
             }
         },
-        "InvalidUsernameOrPasswordResponse": {
-            "description": "Given details username",
+        "InvalidUsernameResponse": {
+            "description": "raise error when given username is invalid",
             "schema": {
                 "type": "object",
                 "properties": {
@@ -122,7 +125,32 @@
                     "res_status": {
                         "type": "string",
                         "enum": [
-                            "INVALID_USERNAME",
+                            "INVALID_USERNAME"
+                        ]
+                    }
+                },
+                "required": [
+                    "response",
+                    "http_status_code",
+                    "res_status"
+                ]
+            }
+        },
+        "InvalidPasswordResponse": {
+            "description": "raises error when given password is incorrect",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "type": "string"
+                    },
+                    "http_status_code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "res_status": {
+                        "type": "string",
+                        "enum": [
                             "INVALID_PASSWORD"
                         ]
                     }
