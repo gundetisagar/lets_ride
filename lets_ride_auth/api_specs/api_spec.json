@@ -179,11 +179,7 @@
                 "password": {
                     "type": "string"
                 }
-            },
-            "required": [
-                "username",
-                "password"
-            ]
+            }
         },
         "UserProfile": {
             "type": "object",

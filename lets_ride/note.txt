@@ -1,0 +1,26 @@
+Ride Request
+Ride Request Page
+User should be able to request a ride
+User should be able to fill From, To, Tentative Date & Time, No. of seats and Luggage quantity
+Actions:
+Enter From
+Enter To
+Select Date & Time
+Select No. of seats
+Enter Luggage quantity
+Submit details as a request
+User should be able to select an option “Flexible with timings”
+Additional Actions:
+Select an option “Flexible with timings”
+Select Date & Time Ranges - From, To(Ex: 21-05-2020 9:00 PM - 22-05-2020 9:00 AM)
+
+
+from_place
+to_place
+date_time
+flexible_timings
+start_date_time
+end_date_time
+number_of_seats
+luggage_quantity
+

@@ -7,18 +7,18 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestCase02LoginAPITestCase::test_case status'] = 200
+snapshots['TestCase01GetProfileAPITestCase::test_case status'] = 200
 
-snapshots['TestCase02LoginAPITestCase::test_case body'] = {
-    'http_status_code': 400,
-    'res_status': 'INVALIDPASSWORD',
-    'response': 'Invalid password, try with valid password'
+snapshots['TestCase01GetProfileAPITestCase::test_case body'] = {
+    'mobile_number': 1,
+    'name': 'string',
+    'username': 'string'
 }
 
-snapshots['TestCase02LoginAPITestCase::test_case header_params'] = {
+snapshots['TestCase01GetProfileAPITestCase::test_case header_params'] = {
     'allow': (
         'Allow',
-        'OPTIONS, POST'
+        'OPTIONS, GET'
     ),
     'content-language': (
         'Content-Language',
@@ -26,11 +26,11 @@ snapshots['TestCase02LoginAPITestCase::test_case header_params'] = {
     ),
     'content-length': (
         'Content-Length',
-        '115'
+        '55'
     ),
     'content-type': (
         'Content-Type',
-        '400'
+        'application/json'
     ),
     'vary': (
         'Vary',

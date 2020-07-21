@@ -7,15 +7,15 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestCase02LoginAPITestCase::test_case status'] = 200
+snapshots['TestCase03LoginAPITestCase::test_case status'] = 200
 
-snapshots['TestCase02LoginAPITestCase::test_case body'] = {
-    'http_status_code': 400,
-    'res_status': 'INVALIDPASSWORD',
-    'response': 'Invalid password, try with valid password'
+snapshots['TestCase03LoginAPITestCase::test_case body'] = {
+    'http_status_code': 404,
+    'res_status': 'INVALIDUSERNAME',
+    'response': 'Invalid username, try with valid username'
 }
 
-snapshots['TestCase02LoginAPITestCase::test_case header_params'] = {
+snapshots['TestCase03LoginAPITestCase::test_case header_params'] = {
     'allow': (
         'Allow',
         'OPTIONS, POST'
@@ -30,7 +30,7 @@ snapshots['TestCase02LoginAPITestCase::test_case header_params'] = {
     ),
     'content-type': (
         'Content-Type',
-        '400'
+        '404'
     ),
     'vary': (
         'Vary',

@@ -1,212 +1,137 @@
 {
-        "swagger": "2.0",
-        "host": "127.0.0.1:8000",
-        "basePath": "/api/lets_ride/",
-        "info": {
-            "version": "1.0.0",
-            "title": "Simple API",
-            "description": "A simple API to learn how to write OpenAPI Specification"
-        },
-        "schemes": [
-            "http"
-        ],
-        "consumes": [
-            "application/json"
-        ],
-        "produces": [
-            "application/json"
-        ],
-        "securityDefinitions": {
-            "oauth": {
-                "tokenUrl": "http://auth.ibtspl.com/oauth2/",
-                "flow": "password",
-                "scopes": {
-                    "read": "read users",
-                    "write": "create users",
-                    "update": "update users",
-                    "delete": "delete users"
-                },
-                "type": "oauth2"
-            }
-        },
-        "security": [],
-        "definitions": {
-            "TodoId": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    }
-                }
+    "swagger": "2.0",
+    "host": "127.0.0.1:8080",
+    "basePath": "/api/lets_ride",
+    "info": {
+        "version": "1.0.0",
+        "title": "LET'S RIDE",
+       "description": "Let's Ride api specs"
+    },
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "oauth": {
+            "tokenUrl": "http://auth.ibtspl.com/oauth2/",
+            "flow": "password",
+            "scopes": {
+                "read": "read users",
+                "write": "create users",
+                "update": "update users",
+                "delete": "delete users"
             },
-            "BasicTodo": {
-                "type": "object",
-                "properties": {
-                    "description": {
-                        "type": "string"
-                    },
-                    "is_completed": {
-                        "type": "boolean"
-                    },
-                    "remind_at": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "description"
-                ]
-            },
-            "Todo": {
-                "allOf": [
-                    {
-                        "$ref": "#/definitions/BasicTodo"
-                    },
-                    {
-                        "$ref": "#/definitions/TodoId"
-                    }
-                ]
-            }
-        },
-        "parameters": {
-            "TodoId": {
-                "description": "todo id",
-                "in": "path",
-                "name": "id",
-                "required": true,
-                "type": "integer"
-            },
-            "BasicTodo": {
-                "description": "Todo Parameter",
-                "in": "body",
-                "name": "todo",
-                "required": true,
-                "schema": {
-                    "$ref": "#/definitions/BasicTodo"
-                }
-            }
-        },
-        "responses": {
-            "SuccessResponse": {
-                "description": "success response"
-            }
-        },
-        "paths": {
-            "/todos/": {
-                "get": {
-                    "summary": "Get all todos",
-                    "description": "Returns a list containing all todos.",
-                    "operationId": "get_todos",
-                    "security": [
-                        {
-                            "oauth": [
-                                "read"
-                            ]
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "A list of todos",
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/Todo"
-                                }
-                            }
-                        }
-                    }
-                },
-                "post": {
-                    "summary": "create a todo",
-                    "description": "Create a todo",
-                    "operationId": "create_todo",
-                    "security": [
-                        {
-                            "oauth": [
-                                "write"
-                            ]
-                        }
-                    ],
-                    "parameters": [
-                        {
-                            "$ref": "#/parameters/BasicTodo"
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "create a todo",
-                            "schema": {
-                                "$ref": "#/definitions/TodoId"
-                            }
-                        }
-                    }
-                }
-            },
-            "/todos/{id}/": {
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/TodoId"
-                    }
-                ],
-                "get": {
-                    "summary": "Get a todo",
-                    "description": "Returns a todo.",
-                    "operationId": "get_todo",
-                    "security": [
-                        {
-                            "oauth": [
-                                "read"
-                            ]
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "A todo",
-                            "schema": {
-                                "$ref": "#/definitions/Todo"
-                            }
-                        }
-                    }
-                },
-                "put": {
-                    "parameters": [
-                        {
-                            "$ref": "#/parameters/BasicTodo"
-                        }
-                    ],
-                    "summary": "Updates a todo",
-                    "description": "Updates a todo.",
-                    "operationId": "update_todo",
-                    "security": [
-                        {
-                            "oauth": [
-                                "update"
-                            ]
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "$ref": "#/responses/SuccessResponse"
-                        }
-                    }
-                },
-                "delete": {
-                    "summary": "Deletes a todo",
-                    "description": "Deletes a todo.",
-                    "operationId": "delete_todo",
-                    "security": [
-                        {
-                            "oauth": [
-                                "delete"
-                            ]
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "$ref": "#/responses/SuccessResponse"
-                        }
+            "type": "oauth2"
+        }
+    },
+    "paths": {
+        "/ride_request/v1/": {
+            "post": {
+                "operationId": "ride_request",
+                "summery": "ride request for user travelling",
+                "parameters": [{
+                    "$ref": "#/parameters/RideRequestParameter"
+                }],
+                "security": [{
+                    "oauth": [
+                        "read",
+                        "write",
+                        "update"
+                    ]
+                }],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SuccessResponse"
                     }
                 }
             }
         }
+    },
+    "parameters": {
+        "RideRequestParameter": {
+            "name": "ride_request_parameters",
+            "in": "body",
+            "description": "Ride Request Details",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/FromAndToPlacesWithTimings"
+            }
+        }
+    },
+    "responses": {
+        "SuccessResponse": {
+            "description": "Successfully your Ride Request Created"
+        },
+        "InvalidUsernameResponse": {
+            "description": "raise error when given username is invalid",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "type": "string"
+                    },
+                    "http_status_code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "res_status": {
+                        "type": "string",
+                        "enum": [
+                            "INVALID_USERNAME"
+                        ]
+                    }
+                },
+                "required": [
+                    "response",
+                    "http_status_code",
+                    "res_status"
+                ]
+            }
+        },
+        "UserProfileResponses": {
+            "description": "Returns User Profile",
+            "schema": {
+                "$ref": "#/definitions/UserProfile"
+            }
+        }
+    },
+    "definitions": {
+        "FromAndToPlacesWithTimings": {
+            "type": "object",
+            "properties": {
+                "from_place": {
+                    "type": "string"
+                },
+                "to_place": {
+                    "type": "string"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "flexible_timings": {
+                    "type": "boolean"
+                },
+                "start_datetime": {
+                    "type": "string"
+                },
+                "end_datetime": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "from_place",
+                "to_place",
+                "datetime",
+                "flexible_timings",
+                "start_datetime",
+                "end_datetime"
+            ]
+        }
     }
-    
+}

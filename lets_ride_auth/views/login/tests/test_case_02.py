@@ -1,16 +1,14 @@
 """
-# TODO: Login API test case with invalid password and raises error and gives error message
+# TODO: Update test case description
 """
-import self as self
-from django_swagger_utils.utils.test import CustomAPITestCase
 
-from lets_ride_auth.models import User
+from django_swagger_utils.utils.test import CustomAPITestCase
 from . import APP_NAME, OPERATION_NAME, REQUEST_METHOD, URL_SUFFIX
 
 REQUEST_BODY = """
 {
     "username": "username_1",
-    "password": "user@1234"
+    "password": "string"
 }
 """
 
@@ -23,10 +21,7 @@ TEST_CASE = {
         "body": REQUEST_BODY,
     },
 }
-
-
 from lets_ride_auth.tests.factories.models import UserFactory
-
 
 
 class TestCase02LoginAPITestCase(CustomAPITestCase):
@@ -36,14 +31,11 @@ class TestCase02LoginAPITestCase(CustomAPITestCase):
     url_suffix = URL_SUFFIX
     test_case_dict = TEST_CASE
 
-    UserFactory.reset_sequence()
-    user_object = UserFactory()
-    user_object.save()
 
+    import pytest
+    @pytest.mark.django_db
     def test_case(self):
-        response = self.default_test_case()  # Returns response object.
+        UserFactory()
+        self.default_test_case()  # Returns response object.
         # Which can be used for further response object checks.
         # Add database state checks here.
-        import json
-        response_object = json.loads(response.content)
-

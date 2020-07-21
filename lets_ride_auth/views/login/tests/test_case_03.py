@@ -1,10 +1,8 @@
 """
-# TODO: login with valid details
+# TODO: Update test case description
 """
-import self as self
-from django_swagger_utils.utils.test import CustomAPITestCase
 
-from lets_ride_auth.models import User
+from django_swagger_utils.utils.test import CustomAPITestCase
 from . import APP_NAME, OPERATION_NAME, REQUEST_METHOD, URL_SUFFIX
 
 REQUEST_BODY = """
@@ -23,10 +21,7 @@ TEST_CASE = {
         "body": REQUEST_BODY,
     },
 }
-
-
 from lets_ride_auth.tests.factories.models import UserFactory
-
 
 
 class TestCase03LoginAPITestCase(CustomAPITestCase):
@@ -36,14 +31,14 @@ class TestCase03LoginAPITestCase(CustomAPITestCase):
     url_suffix = URL_SUFFIX
     test_case_dict = TEST_CASE
 
-    user_obj = UserFactory(username="u1", mobile_number="9876543210")
-    user_obj.set_password("user123")
-    user_obj.save()
 
+
+    import pytest
+    @pytest.mark.django_db
     def test_case(self):
-        response = self.default_test_case()  # Returns response object.
+        user_obj = UserFactory(username="user_1")
+        user_obj.set_password("user@1234")
+        user_obj.save()
+        self.default_test_case()  # Returns response object.
         # Which can be used for further response object checks.
         # Add database state checks here.
-        import json
-        response_object = json.loads(response.content)
-
