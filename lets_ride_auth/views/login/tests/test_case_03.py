@@ -3,11 +3,12 @@
 """
 
 from django_swagger_utils.utils.test import CustomAPITestCase
+
 from . import APP_NAME, OPERATION_NAME, REQUEST_METHOD, URL_SUFFIX
 
 REQUEST_BODY = """
 {
-    "username": "username_1",
+    "username": "user_1",
     "password": "user@1234"
 }
 """
@@ -22,6 +23,9 @@ TEST_CASE = {
     },
 }
 from lets_ride_auth.tests.factories.models import UserFactory
+from common.oauth_user_auth_tokens_service import OAuthUserAuthTokensService
+from lets_ride_auth.dtos.dtos import UserAuthTokensDto
+from unittest.mock import patch
 
 
 class TestCase03LoginAPITestCase(CustomAPITestCase):
@@ -36,9 +40,11 @@ class TestCase03LoginAPITestCase(CustomAPITestCase):
     import pytest
     @pytest.mark.django_db
     def test_case(self):
+
         user_obj = UserFactory(username="user_1")
         user_obj.set_password("user@1234")
         user_obj.save()
+
         self.default_test_case()  # Returns response object.
         # Which can be used for further response object checks.
         # Add database state checks here.

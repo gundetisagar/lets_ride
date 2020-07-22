@@ -14,30 +14,3 @@ snapshots['TestCase03LoginAPITestCase::test_case body'] = {
     'res_status': 'INVALIDUSERNAME',
     'response': 'Invalid username, try with valid username'
 }
-
-snapshots['TestCase03LoginAPITestCase::test_case header_params'] = {
-    'allow': (
-        'Allow',
-        'OPTIONS, POST'
-    ),
-    'content-language': (
-        'Content-Language',
-        'en'
-    ),
-    'content-length': (
-        'Content-Length',
-        '115'
-    ),
-    'content-type': (
-        'Content-Type',
-        '404'
-    ),
-    'vary': (
-        'Vary',
-        'Accept-Language, Origin, Cookie'
-    ),
-    'x-frame-options': (
-        'X-Frame-Options',
-        'SAMEORIGIN'
-    )
-}

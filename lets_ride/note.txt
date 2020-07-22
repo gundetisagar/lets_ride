@@ -21,6 +21,125 @@ date_time
 flexible_timings
 start_date_time
 end_date_time
-number_of_seats
+no_of_seats
 luggage_quantity
 
+
+
+    def test_datetime_format(self, storage_mock, presenter_mock):
+        # Arrange
+        ride_request_dto = RideRequestDtoFactory(
+            flexible_timings=False,
+            datetime="31-12-2017 00:00:00"
+        )
+        interator = RideRequestInteractor(storage=storage_mock)
+        mock_object = Mock()
+        presenter_mock.raise_exception_for_invalid_datetime_format.return_value = mock_object
+
+        # Act
+        response = interator.create_ride_request_wrapper(
+            ride_request_dto=ride_request_dto,
+            presenter=presenter_mock
+        )
+        # Assert
+        assert response == mock_object
+        presenter_mock.raise_exception_for_invalid_datetime_format.assert_called_once()
+
+    def test_start_datetime_format(self, storage_mock, presenter_mock):
+        # Arrange
+        ride_request_dto = RideRequestDtoFactory(
+            flexible_timings=True,
+            datetime=None,
+            start_datetime="31-12-2017 00:00:00",
+            end_datetime="2017-12-31 00:00:00"
+        )
+        interator = RideRequestInteractor(storage=storage_mock)
+        mock_object = Mock()
+        presenter_mock.raise_exception_for_invalid_start_datetime_format.return_value = mock_object
+
+        # Act
+        response = interator.create_ride_request_wrapper(
+            ride_request_dto=ride_request_dto,
+            presenter=presenter_mock
+        )
+        # Assert
+        assert response == mock_object
+        presenter_mock.raise_exception_for_invalid_start_datetime_format.assert_called_once()
+
+    def test_end_datetime_format(self, storage_mock, presenter_mock):
+        # Arrange
+        ride_request_dto = RideRequestDtoFactory(
+            flexible_timings=True,
+            datetime=None,
+            start_datetime="2017-12-31 00:00:00",
+            end_datetime="31-12-2017 00:00:00"
+        )
+        print(ride_request_dto)
+        interator = RideRequestInteractor(storage=storage_mock)
+        mock_object = Mock()
+        presenter_mock.raise_exception_for_invalid_end_datetime_format.return_value = mock_object
+
+        # Act
+        response = interator.create_ride_request_wrapper(
+            ride_request_dto=ride_request_dto,
+            presenter=presenter_mock
+        )
+        # Assert
+        assert response == mock_object
+        presenter_mock.raise_exception_for_invalid_end_datetime_format.assert_called_once()
+
+    def test_datetime_is_in_future(self, storage_mock, presenter_mock):
+        # arrange
+        ride_request_dto = RideRequestDtoFactory(
+            flexible_timings=False,
+            datetime="2017-12-31 00:00:00",
+            start_datetime=None,
+            end_datetime=None
+        )
+        interactor = RideRequestInteractor(storage=storage_mock)
+        mock_object = Mock()
+        presenter_mock.raise_exception_for_datetime_is_in_past.return_value = mock_object
+
+        # Act
+        response = interactor.create_ride_request_wrapper(
+            ride_request_dto=ride_request_dto,
+            presenter=presenter_mock
+        )
+        # Assert
+        assert response == mock_object
+        presenter_mock.raise_exception_for_datetime_is_in_past.assert_called_once()
+
+    def test_start_datetime_is_less_than_end_datetime(self,
+                                                                                     storage_mock,
+                                                                                     presenter_mock):
+        # Arrange
+        ride_request_dto = RideRequestDtoFactory(
+            flexible_timings=True,
+            datetime=None,
+            start_datetime="2020-07-23 00:00:00",
+            end_datetime="2020-07-23 00:00:00"
+        )
+        print(ride_request_dto)
+        interactor = RideRequestInteractor(storage=storage_mock)
+        mock_object = Mock()
+        presenter_mock.raise_exception_for_invalid_end_datetime.return_value = mock_object
+
+        # Act
+        response = interactor.create_ride_request_wrapper(
+            ride_request_dto=ride_request_dto,
+            presenter=presenter_mock
+        )
+        # Assert
+        assert response == mock_object
+        presenter_mock.raise_exception_for_invalid_end_datetime.assert_called_once()
+        m
+
+    # def test_when_flexible_timings_false_and_datetime_is_none_raises_exception(self,
+    #                                                                            storage_mock,
+    #                                                                            presenter_mock):
+    #     # Arrange
+    #     ride_request_dto = RideRequestDtoFactory(
+    #         flexible_timings=False,
+    #         datetime=None
+    #     )
+    #     interator = RideRequestInteractor(storage=storage_mock)

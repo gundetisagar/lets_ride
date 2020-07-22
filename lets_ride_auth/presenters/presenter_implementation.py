@@ -21,7 +21,7 @@ class PresenterImplementation(PresenterInterface):
             "http_status_code": 404,
             "res_status": INVALID_USERNAME[1]
         })
-        response_object = response.HttpResponse(data, 404)
+        response_object = response.HttpResponse(data, status=404)
         return response_object
 
     def raise_exception_for_invalid_password(self):
@@ -31,7 +31,7 @@ class PresenterImplementation(PresenterInterface):
             "http_status_code": 400,
             "res_status": INVALID_PASSWORD[1]
         })
-        response_object = response.HttpResponse(data, 400)
+        response_object = response.HttpResponse(data, status=400)
         return response_object
 
     def login_response(self, tokens_dto) -> response.HttpResponse:

@@ -36,6 +36,33 @@ class TestCase01LoginAPITestCase(CustomAPITestCase):
     @pytest.mark.django_db
     def test_case(self):
         UserFactory()
-        self.default_test_case()  # Returns response object.
+        print("*"*100)
+        from lets_ride_auth.models import User
+        print(User.objects.all().values())
+        response = self.default_test_case()  # Returns response object.
         # Which can be used for further response object checks.
         # Add database state checks here.
+        print(response)
+        import json
+        response_content = json.dumps(response.content)
+        print(response_data)
+
+        # response_content = json.loads(response.content)
+        #
+        # comment_id = response_content['comment_id']
+        #
+        # comment = Comment.objects.get(id=comment_id)
+        #
+        # self.assert_match_snapshot(
+        #     name='user_id',
+        #     value=comment.user_id
+        # )
+        #
+        # self.assert_match_snapshot(
+        #     name='post_id',
+        #     value=comment.post.id
+        # )
+        # self.assert_match_snapshot(
+        #     name='comment_text',
+        #     value=comment.comment_text
+        # )

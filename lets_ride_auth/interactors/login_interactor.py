@@ -28,7 +28,6 @@ class LoginInteractor:
         token_dto = self.login(username=username, password=password)
         return presenter.login_response(token_dto)
 
-
     def login(self, username, password):
         self.user_storage.validate_username(username=username)
 
@@ -42,5 +41,3 @@ class LoginInteractor:
             user_id=user_id
         )
         return token_dto
-
-

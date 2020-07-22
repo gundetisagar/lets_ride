@@ -1,25 +1,3 @@
-Views test cases run
+Views test cases
 
-python3.8 manage.py test lets_ride_auth.views.login.tests.test_case_01
-
-
-rint("*"*100)
-    print(kwargs)
-    print("*"*100)
-
-    request_data = kwargs['request_data']
-    username = request_data['username']
-    password = request_data['password']
-    user_storage = UserStorageImplementation()
-    presenter = PresenterImplementation()
-    oauth_storage = OAuth2SQLStorage()
-
-    interactor = LoginInteractor(
-        user_storage=user_storage,
-        oauth_storage=oauth_storage
-    )
-
-    access_details = interactor.login_wrapper(
-        username=username, password=password, presenter=presenter
-    )
-    return access_details
+pytest lets_ride_auth/views/login/tests/test_case_01

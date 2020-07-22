@@ -34,7 +34,7 @@
         "/ride_request/v1/": {
             "post": {
                 "operationId": "ride_request",
-                "summery": "ride request for user travelling",
+                "summary": "ride request for user travelling",
                 "parameters": [{
                     "$ref": "#/parameters/RideRequestParameter"
                 }],
@@ -48,6 +48,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/responses/SuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/InvalidNoOfSeatsAndLuggageQuantityResponse"
                     }
                 }
             }
@@ -60,7 +63,7 @@
             "description": "Ride Request Details",
             "required": true,
             "schema": {
-                "$ref": "#/definitions/FromAndToPlacesWithTimings"
+                "$ref": "#/definitions/RideRequestDefinition"
             }
         }
     },
@@ -68,8 +71,8 @@
         "SuccessResponse": {
             "description": "Successfully your Ride Request Created"
         },
-        "InvalidUsernameResponse": {
-            "description": "raise error when given username is invalid",
+        "InvalidNoOfSeatsAndLuggageQuantityResponse": {
+            "description": "raise error when given no_of_seats or luggage_quantity is invalid",
             "schema": {
                 "type": "object",
                 "properties": {
@@ -83,7 +86,8 @@
                     "res_status": {
                         "type": "string",
                         "enum": [
-                            "INVALID_USERNAME"
+                            "INVALIDNOOFSEATS",
+                            "INVALIDLUGGAGEQUANTITY"
                         ]
                     }
                 },
@@ -92,12 +96,6 @@
                     "http_status_code",
                     "res_status"
                 ]
-            }
-        },
-        "UserProfileResponses": {
-            "description": "Returns User Profile",
-            "schema": {
-                "$ref": "#/definitions/UserProfile"
             }
         }
     },
@@ -112,26 +110,54 @@
                     "type": "string"
                 },
                 "datetime": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "datetime"
                 },
                 "flexible_timings": {
                     "type": "boolean"
                 },
                 "start_datetime": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "datetime"
                 },
                 "end_datetime": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "datetime"
                 }
             },
             "required": [
                 "from_place",
                 "to_place",
-                "datetime",
-                "flexible_timings",
-                "start_datetime",
-                "end_datetime"
+                "flexible_timings"
             ]
+        },
+        "RideRequest": {
+            "type": "object",
+            "properties": {
+                "no_of_seats": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "luggage_quantity": {
+                     "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "no_of_seats",
+                "luggage_quantity"
+            ]
+        },
+        "RideRequestDefinition": {
+            "allOf":[
+                {
+                    "$ref": "#/definitions/FromAndToPlacesWithTimings"
+                },
+                {
+                    "$ref": "#/definitions/RideRequest"
+                }
+            ]
+
         }
     }
 }

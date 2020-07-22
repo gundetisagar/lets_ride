@@ -8,36 +8,3 @@ from snapshottest import Snapshot
 snapshots = Snapshot()
 
 snapshots['TestCase01LoginAPITestCase::test_case status'] = 200
-
-snapshots['TestCase01LoginAPITestCase::test_case body'] = {
-    'http_status_code': 404,
-    'res_status': 'INVALIDUSERNAME',
-    'response': 'Invalid username, try with valid username'
-}
-
-snapshots['TestCase01LoginAPITestCase::test_case header_params'] = {
-    'allow': (
-        'Allow',
-        'POST, OPTIONS'
-    ),
-    'content-language': (
-        'Content-Language',
-        'en'
-    ),
-    'content-length': (
-        'Content-Length',
-        '115'
-    ),
-    'content-type': (
-        'Content-Type',
-        '404'
-    ),
-    'vary': (
-        'Vary',
-        'Accept-Language, Origin, Cookie'
-    ),
-    'x-frame-options': (
-        'X-Frame-Options',
-        'SAMEORIGIN'
-    )
-}
