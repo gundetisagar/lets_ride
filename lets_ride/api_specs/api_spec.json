@@ -25,7 +25,8 @@
                 "read": "read users",
                 "write": "create users",
                 "update": "update users",
-                "delete": "delete users"
+                "delete": "delete users",
+                "superuser": "super user permission"
             },
             "type": "oauth2"
         }
@@ -42,7 +43,8 @@
                     "oauth": [
                         "read",
                         "write",
-                        "update"
+                        "update",
+                        "superuser"
                     ]
                 }],
                 "responses": {
@@ -86,8 +88,11 @@
                     "res_status": {
                         "type": "string",
                         "enum": [
-                            "INVALIDNOOFSEATS",
-                            "INVALIDLUGGAGEQUANTITY"
+                            "InvalidToPlace",
+                            "InvalidDatetime",
+                            "InvalidEndDatetime",
+                            "InvalidNoOfSeats",
+                            "InvalidLuggageQuantity"
                         ]
                     }
                 },
@@ -109,18 +114,18 @@
                 "to_place": {
                     "type": "string"
                 },
-                "datetime": {
+                "date_time": {
                     "type": "string",
                     "format": "datetime"
                 },
                 "flexible_timings": {
                     "type": "boolean"
                 },
-                "start_datetime": {
+                "start_date_time": {
                     "type": "string",
                     "format": "datetime"
                 },
-                "end_datetime": {
+                "end_date_time": {
                     "type": "string",
                     "format": "datetime"
                 }

@@ -7,23 +7,36 @@ class ValidationMixin:
         if from_place == to_place:
             from lets_ride.exceptions.exceptions import InvalidToPlace
             raise InvalidToPlace
-        return True
 
-    def validate_datetime(self, date_time: str):
+    def validate_date_time(self, date_time: str):
         import datetime
-        print(datetime)
-        date_time = datetime.datetime.strptime(datetime, DEFAULT_DATE_TIME_FORMAT)
+        date_time = datetime.datetime.strptime(date_time, DEFAULT_DATE_TIME_FORMAT)
         current_datetime = datetime.datetime.now()
-        print(date_time)
-        print(current_datetime)
 
+        if current_datetime > date_time:
+            from lets_ride.exceptions.exceptions import InvalidDatetime
+            raise InvalidDatetime
 
-    def validate_start_datetime_less_than_end_datetime(self, start_datetime: str, end_datetime: str):
+    def validate_start_datetime_less_than_end_datetime(self, start_date_time: str, end_date_time: str):
         import datetime
-        start_datetime = datetime.datetime.strptime(start_datetime, DEFAULT_DATE_TIME_FORMAT)
-        end_datetime = datetime.datetime.strptime(end_datetime, DEFAULT_DATE_TIME_FORMAT)
+        start_date_time = datetime.datetime.strptime(start_date_time, DEFAULT_DATE_TIME_FORMAT)
+        end_date_time = datetime.datetime.strptime(end_date_time, DEFAULT_DATE_TIME_FORMAT)
+        current_datetime = datetime.datetime.now()
 
-        if start_datetime > end_datetime:
+        if current_datetime > start_date_time:
+            from lets_ride.exceptions.exceptions import InvalidDatetime
+            raise InvalidDatetime
+
+        if start_date_time > end_date_time:
             from lets_ride.exceptions.exceptions import InvalidEndDatetime
             raise InvalidEndDatetime
 
+    def validate_no_of_seats(self, no_of_seats: int):
+        if no_of_seats <= 0:
+            from lets_ride.exceptions.exceptions import InvalidNoOfSeats
+            raise InvalidNoOfSeats
+
+    def validate_luggage_quantity(self, luggage_quantity: int):
+        if luggage_quantity < 0:
+            from lets_ride.exceptions.exceptions import InvalidLuggageQuantity
+            raise InvalidLuggageQuantity

@@ -9,9 +9,9 @@ class RideRequestDTO:
     user_id: int
     from_place: str
     to_place: str
-    datetime: datetime
+    date_time: datetime
     flexible_timings: bool
-    start_datetime: datetime
-    end_datetime: datetime
+    start_date_time: datetime
+    end_date_time: datetime
     no_of_seats: int
     luggage_quantity: int

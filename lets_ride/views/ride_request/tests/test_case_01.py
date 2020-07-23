@@ -7,12 +7,12 @@ from . import APP_NAME, OPERATION_NAME, REQUEST_METHOD, URL_SUFFIX
 
 REQUEST_BODY = """
 {
-    "from_place": "string",
-    "to_place": "string",
-    "datetime": "string",
+    "from_place": "hyd",
+    "to_place": "kurnool",
+    "datetime": null,
     "flexible_timings": true,
-    "start_datetime": "string",
-    "end_datetime": "string",
+    "start_datetime": "2020-05-27 05:06:27",
+    "end_datetime": "2020-06-30 05:06:29",
     "no_of_seats": 1,
     "luggage_quantity": 1
 }
@@ -35,6 +35,11 @@ class TestCase01RideRequestAPITestCase(CustomAPITestCase):
     request_method = REQUEST_METHOD
     url_suffix = URL_SUFFIX
     test_case_dict = TEST_CASE
+
+    def setupUser(self, username, password):
+        super(TestCase01RideRequestAPITestCase, self).setupUser(
+            username=username, password=password
+        )
 
     def test_case(self):
         self.default_test_case() # Returns response object.

@@ -13,8 +13,18 @@ class InvalidStartDatetimeFormat(Exception):
 class InvalidEndDatetimeFormat(Exception):
     pass
 
+
 class InvalidDatetime(Exception):
     pass
 
+
 class InvalidEndDatetime(Exception):
+    pass
+
+
+class InvalidNoOfSeats(Exception):
+    pass
+
+
+class InvalidLuggageQuantity(Exception):
     pass

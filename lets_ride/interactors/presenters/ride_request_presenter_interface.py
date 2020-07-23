@@ -14,19 +14,14 @@ class RideRequestPresenterInterface(ABC):
     def raise_exception_for_invalid_end_datetime(self) -> HttpResponse:
         pass
 
-    # @abstractmethod
-    # def raise_exception_for_invalid_datetime_format(self) -> HttpResponse:
-    #     pass
-    #
-    # @abstractmethod
-    # def raise_exception_for_invalid_start_datetime_format(self) -> HttpResponse:
-    #     pass
-    #
-    # @abstractmethod
-    # def raise_exception_for_invalid_end_datetime_format(self) -> HttpResponse:
-    #     pass
-    #
-    # @abstractmethod
-    # def raise_exception_for_datetime_is_in_past(self) -> HttpResponse:
-    #     pass
-    #
+    @abstractmethod
+    def raise_exception_for_invalid_date_time(self) -> HttpResponse:
+        pass
+
+    @abstractmethod
+    def raise_exception_for_invalid_no_of_seats(self) -> HttpResponse:
+        pass
+
+    @abstractmethod
+    def raise_exception_for_invalid_luggage_quantity(self)-> HttpResponse:
+        pass
