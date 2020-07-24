@@ -25,14 +25,14 @@ snapshots['test_raise_exception_for_invalid_end_datetime response'] = {
     'response': 'your end datetime is less than start datetime, please enter valid end datetime'
 }
 
-snapshots['test_raise_exception_for_invalid_no_of_seats response'] = {
+snapshots['test_raise_exception_for_invalid_no_of_assets response'] = {
     'http_status_code': 400,
-    'res_status': 'InvalidNoOfSeatsAvailable',
-    'response': 'the no of seats available should be positive, please enter valid no of seats available'
+    'res_status': 'InvalidNoOfAssets',
+    'response': 'the no of assets should be positive, please enter valid no of seats'
 }
 
-snapshots['test_raise_exception_for_invalid_luggage_quantity response'] = {
+snapshots['test_raise_exception_for_invalid_whom_to_deliver response'] = {
     'http_status_code': 400,
-    'res_status': 'InvalidAssetsQuantity',
-    'response': 'your assets quantity is in negative value, please enter valid assets quantity'
+    'res_status': 'InvaliWhomToDeliver',
+    'response': 'please enter whom to deliver name and phone number'
 }

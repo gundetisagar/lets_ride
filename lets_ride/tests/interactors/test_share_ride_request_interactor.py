@@ -6,7 +6,7 @@ from lets_ride.tests.factories.interactor_dtos import ShareRideDtoFactory
 from lets_ride.interactors.share_ride_interactor import ShareRideInteractor
 
 
-class TestRideRequest:
+class TestShareRide:
 
     @pytest.fixture()
     def storage_mock(self):

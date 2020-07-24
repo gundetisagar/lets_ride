@@ -1,4 +1,7 @@
+import datetime as datetime
+
 from lets_ride.constants.constants import DEFAULT_DATE_TIME_FORMAT
+import datetime
 
 
 class ValidationMixin:
@@ -9,24 +12,18 @@ class ValidationMixin:
             from lets_ride.exceptions.exceptions import InvalidToPlace
             raise InvalidToPlace
 
-    def validate_date_time(self, date_time: str):
-        import datetime
-        date_time = datetime.datetime.strptime(date_time,
-                                               DEFAULT_DATE_TIME_FORMAT)
+    def validate_date_time(self, date_time: datetime.datetime):
         current_datetime = datetime.datetime.now()
 
         if current_datetime > date_time:
             from lets_ride.exceptions.exceptions import InvalidDatetime
             raise InvalidDatetime
 
-    def validate_start_datetime_less_than_end_datetime(self,
-                                                       start_date_time: str,
-                                                       end_date_time: str):
+    def validate_start_datetime_less_than_end_datetime(
+            self, start_date_time: datetime.datetime,
+            end_date_time: datetime.datetime):
+
         import datetime
-        start_date_time = datetime.datetime.strptime(start_date_time,
-                                                     DEFAULT_DATE_TIME_FORMAT)
-        end_date_time = datetime.datetime.strptime(end_date_time,
-                                                   DEFAULT_DATE_TIME_FORMAT)
         current_datetime = datetime.datetime.now()
 
         if current_datetime > start_date_time:

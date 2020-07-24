@@ -1,4 +1,5 @@
-from lets_ride.interactors.presenters.ride_request_presenter_interface import RideRequestPresenterInterface
+from lets_ride.interactors.presenters.ride_request_presenter_interface import \
+    RideRequestPresenterInterface
 import json
 
 from django.http import response
@@ -37,11 +38,11 @@ class RideRequestPresenterImplementation(RideRequestPresenterInterface):
         return response_object
 
     def raise_exception_for_invalid_no_of_seats(self) -> response.HttpResponse:
-        from lets_ride.constants.exception_messages import INVALID_NO_OF_SEATS
+        from lets_ride.constants.exception_messages import INVALID_NO_OF_ASSETS
         data = json.dumps({
-            "response": INVALID_NO_OF_SEATS[0],
+            "response": INVALID_NO_OF_ASSETS[0],
             "http_status_code": 400,
-            "res_status": INVALID_NO_OF_SEATS[1]
+            "res_status": INVALID_NO_OF_ASSETS[1]
         })
         response_object = response.HttpResponse(data, status=400)
         return response_object

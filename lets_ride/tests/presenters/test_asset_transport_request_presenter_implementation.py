@@ -1,11 +1,11 @@
-from lets_ride.presenters.ride_request_presenter_implementation import \
-    RideRequestPresenterImplementation
+from lets_ride.presenters.asset_transport_request_presenter_implementation\
+    import AssetTransportRequestPresenterImplementation
 import json
 
 
 def test_raise_exception_for_from_and_to_place_are_same(snapshot):
     # Arrange
-    json_presenter = RideRequestPresenterImplementation()
+    json_presenter = AssetTransportRequestPresenterImplementation()
     # Act
     response_object = json_presenter.raise_exception_for_from_and_to_place_are_same()
     # Assert
@@ -15,7 +15,7 @@ def test_raise_exception_for_from_and_to_place_are_same(snapshot):
 
 def test_raise_exception_for_invalid_date_time(snapshot):
     # Arrange
-    json_presenter = RideRequestPresenterImplementation()
+    json_presenter = AssetTransportRequestPresenterImplementation()
     # Act
     response_object = json_presenter.raise_exception_for_invalid_date_time()
     # Assert
@@ -25,7 +25,7 @@ def test_raise_exception_for_invalid_date_time(snapshot):
 
 def test_raise_exception_for_invalid_end_datetime(snapshot):
     # Arrange
-    json_presenter = RideRequestPresenterImplementation()
+    json_presenter = AssetTransportRequestPresenterImplementation()
     # Act
     response_object = json_presenter.raise_exception_for_invalid_end_datetime()
     # Assert
@@ -33,21 +33,20 @@ def test_raise_exception_for_invalid_end_datetime(snapshot):
     snapshot.assert_match(response, "response")
 
 
-def test_raise_exception_for_invalid_no_of_seats(snapshot):
+def test_raise_exception_for_invalid_no_of_assets(snapshot):
     # Arrange
-    json_presenter = RideRequestPresenterImplementation()
+    json_presenter = AssetTransportRequestPresenterImplementation()
     # Act
-    response_object = json_presenter.raise_exception_for_invalid_no_of_seats()
+    response_object = json_presenter.raise_exception_for_invalid_no_of_assets()
     # Assert
     response = json.loads(response_object.content)
     snapshot.assert_match(response, "response")
 
-
-def test_raise_exception_for_invalid_luggage_quantity(snapshot):
+def test_raise_exception_for_invalid_whom_to_deliver(snapshot):
     # Arrange
-    json_presenter = RideRequestPresenterImplementation()
+    json_presenter = AssetTransportRequestPresenterImplementation()
     # Act
-    response_object = json_presenter.raise_exception_for_invalid_luggage_quantity()
+    response_object = json_presenter.raise_exception_for_invalid_whom_to_deliver()
     # Assert
     response = json.loads(response_object.content)
     snapshot.assert_match(response, "response")

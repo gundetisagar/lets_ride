@@ -96,7 +96,7 @@
         "summary": "asset request for whom are in travelling",
         "parameters": [
           {
-            "$ref": "#/parameters/AssetRequestParameter"
+            "$ref": "#/parameters/AssetTransportRequestParameter"
           }
         ],
         "security": [
@@ -114,7 +114,7 @@
             "$ref": "#/responses/SuccessResponse"
           },
           "400": {
-            "$ref": "#/responses/InvalidAssetRequestResponse"
+            "$ref": "#/responses/InvalidAssetTransportRequestResponse"
           }
         }
       }
@@ -168,13 +168,13 @@
         "$ref": "#/definitions/ShareRideDefinition"
       }
     },
-    "AssetRequestParameter": {
-      "name": "asset_request_parameters",
+    "AssetTransportRequestParameter": {
+      "name": "asset_transport_request_parameters",
       "in": "body",
       "description": "Share Ride Details",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/AssetRequestDefinition"
+        "$ref": "#/definitions/AssetTransportRequestDefinition"
       }
     },
     "ShareTravelInfoParameter": {
@@ -251,7 +251,7 @@
         ]
       }
     },
-    "InvalidAssetRequestResponse": {
+    "InvalidAssetTransportRequestResponse": {
       "description": "raise error when given invalid responses",
       "schema": {
         "type": "object",
@@ -270,7 +270,8 @@
               "InvalidDatetime",
               "InvalidEndDatetime",
               "InvalidNoOfAssets",
-              "InvalidOthersField"
+              "InvalidOthersField",
+              "InvalidWhomToDeliver"
             ]
           }
         },
@@ -397,7 +398,7 @@
         }
       ]
     },
-    "AssetRequest": {
+    "AssetTransportRequest": {
       "type": "object",
       "properties": {
         "no_of_assets": {
@@ -436,13 +437,13 @@
 
       ]
     },
-    "AssetRequestDefinition": {
+    "AssetTransportRequestDefinition": {
       "allOf": [
         {
           "$ref": "#/definitions/FromAndToPlacesWithTimings"
         },
         {
-          "$ref": "#/definitions/AssetRequest"
+          "$ref": "#/definitions/AssetTransportRequest"
         }
       ]
     },

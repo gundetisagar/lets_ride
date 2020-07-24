@@ -36,3 +36,15 @@ class InvalidAssetsQuantity(Exception):
 
 class InvalidNoOfSeatsAvailable(Exception):
     pass
+
+
+class InvalidNoOfAssets(Exception):
+    pass
+
+
+class InvalidOthersField(Exception):
+    pass
+
+
+class InvalidWhomToDeliver(Exception):
+    pass

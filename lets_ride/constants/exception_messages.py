@@ -37,3 +37,13 @@ INVALID_ASSETS_QUANTITY = (
     "your assets quantity is in negative value, please enter valid assets quantity",
     "InvalidAssetsQuantity"
 )
+
+INVALID_NO_OF_ASSETS = (
+    "the no of assets should be positive, please enter valid no of seats",
+    "InvalidNoOfAssets"
+)
+
+INVALID_WHOM_TO_DELIVER = (
+    "please enter whom to deliver name and phone number",
+    "InvaliWhomToDeliver"
+)
