@@ -10,7 +10,7 @@ INVALID_TO_PLACE = (
 
 INVALID_DATE_TIME = (
     "date_time is in past, please enter present or future date_time",
-    "InvaidDatetime"
+    "InvalidDatetime"
 )
 
 INVALID_END_DATETIME = (
@@ -26,4 +26,14 @@ INVALID_NO_OF_SEATS = (
 INVALID_LUGGAGE_QUANTITY = (
     "your luggage quantity is in negative value, please enter valid luggage quantity",
     "InvalidLuggageQuantity"
+)
+
+INVALID_NO_OF_SEATS_AVAILABLE = (
+    "the no of seats available should be positive, please enter valid no of seats available",
+    "InvalidNoOfSeatsAvailable"
+)
+
+INVALID_ASSETS_QUANTITY = (
+    "your assets quantity is in negative value, please enter valid assets quantity",
+    "InvalidAssetsQuantity"
 )

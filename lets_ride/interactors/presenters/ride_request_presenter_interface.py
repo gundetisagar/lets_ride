@@ -23,5 +23,5 @@ class RideRequestPresenterInterface(ABC):
         pass
 
     @abstractmethod
-    def raise_exception_for_invalid_luggage_quantity(self)-> HttpResponse:
+    def raise_exception_for_invalid_luggage_quantity(self) -> HttpResponse:
         pass

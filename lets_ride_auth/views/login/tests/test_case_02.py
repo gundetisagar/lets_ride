@@ -7,7 +7,7 @@ from . import APP_NAME, OPERATION_NAME, REQUEST_METHOD, URL_SUFFIX
 
 REQUEST_BODY = """
 {
-    "username": "username_1",
+    "username": "username_0",
     "password": "string"
 }
 """
@@ -35,7 +35,9 @@ class TestCase02LoginAPITestCase(CustomAPITestCase):
     import pytest
     @pytest.mark.django_db
     def test_case(self):
+        UserFactory.reset_sequence()
         UserFactory()
+
         self.default_test_case()  # Returns response object.
         # Which can be used for further response object checks.
         # Add database state checks here.

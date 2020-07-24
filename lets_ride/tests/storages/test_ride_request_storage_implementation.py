@@ -1,5 +1,6 @@
 from lets_ride.models import RideRequest
-from lets_ride.storages.ride_request_storage_implementation import RideRequestStorageImplementation
+from lets_ride.storages.ride_request_storage_implementation import \
+    RideRequestStorageImplementation
 import pytest
 from freezegun import freeze_time
 
@@ -91,4 +92,3 @@ class TestRideRequestStorageImplementation:
         assert end_date_time == str(ride_request.end_date_time)
         assert no_of_seats == ride_request.no_of_seats
         assert luggage_quantity == ride_request.luggage_quantity
-

@@ -24,6 +24,47 @@ end_date_time
 no_of_seats
 luggage_quantity
 
+--> asset request
+from_place
+to_place
+date_time
+flexible_timings
+start_date_time
+end_date_time
+no_of_assets
+asset_type
+    ->parcel
+    ->bag
+    ->Furniture
+    ->others
+other
+asset_sensitivity
+     ->sensitive
+     ->highly sensitive
+     ->electronic
+whom_to_deliver
+
+no_of_assets not less than 1 (InvalidNoOfAssets)
+if enum is others others field is mandatory (InvalidOthersField)
+
+
+-->share travel info
+from_place
+to_place
+date_time
+flexible_timings
+start_date_time
+end_date_time
+travel_medium
+    ->Bus
+    ->Car
+    ->Flight
+assets_quantity
+
+travel medium must be enum
+assets_quantity not less than zero (InvalidAssetQuantity)
+
+
 
 
     def test_datetime_format(self, storage_mock, presenter_mock):

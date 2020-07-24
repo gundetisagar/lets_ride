@@ -7,7 +7,7 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestCase02LoginAPITestCase::test_case status'] = 200
+snapshots['TestCase02LoginAPITestCase::test_case status'] = 400
 
 snapshots['TestCase02LoginAPITestCase::test_case body'] = {
     'http_status_code': 400,
@@ -30,7 +30,7 @@ snapshots['TestCase02LoginAPITestCase::test_case header_params'] = {
     ),
     'content-type': (
         'Content-Type',
-        '400'
+        'text/html; charset=utf-8'
     ),
     'vary': (
         'Vary',

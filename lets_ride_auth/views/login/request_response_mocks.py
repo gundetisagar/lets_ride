@@ -13,7 +13,7 @@ RESPONSE_200_JSON = """
     "user_id": 1,
     "access_token": "string",
     "refresh_token": "string",
-    "expires_in": 1
+    "expires_in": "2099-12-31 00:00:00"
 }
 """
 

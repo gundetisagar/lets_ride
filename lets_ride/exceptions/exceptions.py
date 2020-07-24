@@ -28,3 +28,11 @@ class InvalidNoOfSeats(Exception):
 
 class InvalidLuggageQuantity(Exception):
     pass
+
+
+class InvalidAssetsQuantity(Exception):
+    pass
+
+
+class InvalidNoOfSeatsAvailable(Exception):
+    pass

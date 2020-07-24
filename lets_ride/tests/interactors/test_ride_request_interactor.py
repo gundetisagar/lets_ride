@@ -12,7 +12,8 @@ class TestRideRequest:
     @pytest.fixture()
     def storage_mock(self):
         from unittest.mock import create_autospec
-        from lets_ride.interactors.storages.ride_request_storage_interface import RideRequestStorageInterface
+        from lets_ride.interactors.storages.ride_request_storage_interface import \
+            RideRequestStorageInterface
         storage = create_autospec(RideRequestStorageInterface)
         return storage
 
@@ -29,7 +30,8 @@ class TestRideRequest:
                                                                         storage_mock,
                                                                         presenter_mock):
         # Arrange
-        ride_request_dto = RideRequestDtoFactory(from_place="kurnool", to_place="kurnool")
+        ride_request_dto = RideRequestDtoFactory(from_place="kurnool",
+                                                 to_place="kurnool")
         interator = RideRequestInteractor(storage=storage_mock)
         mock_object = Mock()
         presenter_mock.raise_exception_for_from_and_to_place_are_same.return_value = mock_object
@@ -65,7 +67,8 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_from_and_to_place_are_same.assert_not_called()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_date_time_is_in_past_raise_exception(self, storage_mock, presenter_mock):
+    def test_date_time_is_in_past_raise_exception(self, storage_mock,
+                                                  presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=False,
@@ -85,8 +88,9 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_date_time.assert_called_once()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_given_date_time_is_greater_than_current_datetime_did_not_raise_exception(self, storage_mock,
-                                                                                      presenter_mock):
+    def test_given_date_time_is_greater_than_current_datetime_did_not_raise_exception(
+            self, storage_mock,
+            presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=False,
@@ -102,7 +106,9 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_date_time.assert_not_called()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_end_datetime_is_less_than_start_datetime_raises_exception(self, storage_mock, presenter_mock):
+    def test_end_datetime_is_less_than_start_datetime_raises_exception(self,
+                                                                       storage_mock,
+                                                                       presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=True,
@@ -125,7 +131,8 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_end_datetime.assert_called_once()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_start_datetime_less_than_end_datetime_did_not_raises_exception(self, storage_mock, presenter_mock):
+    def test_start_datetime_less_than_end_datetime_did_not_raises_exception(
+            self, storage_mock, presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=True,
@@ -144,7 +151,8 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_end_datetime.assert_not_called()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_no_of_seats_equals_to_zero_raise_exception(self, storage_mock, presenter_mock):
+    def test_no_of_seats_equals_to_zero_raise_exception(self, storage_mock,
+                                                        presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             no_of_seats=0
@@ -163,7 +171,8 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_no_of_seats.assert_called_once()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_no_of_seats_is_negative_raise_exception(self, storage_mock, presenter_mock):
+    def test_no_of_seats_is_negative_raise_exception(self, storage_mock,
+                                                     presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             no_of_seats=-1
@@ -182,7 +191,8 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_no_of_seats.assert_called_once()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_no_of_seats_is_positive_did_not_raise_exception(self, storage_mock, presenter_mock):
+    def test_no_of_seats_is_positive_did_not_raise_exception(self, storage_mock,
+                                                             presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             no_of_seats=1
@@ -199,7 +209,8 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_no_of_seats.assert_not_called()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_luggage_quantity_is_negative_raise_exception(self, storage_mock, presenter_mock):
+    def test_luggage_quantity_is_negative_raise_exception(self, storage_mock,
+                                                          presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             luggage_quantity=-1
@@ -218,10 +229,12 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_luggage_quantity.assert_called_once()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_luggage_quantity_is_zero_did_not_raise_exception(self, storage_mock, presenter_mock):
+    def test_luggage_quantity_is_zero_did_not_raise_exception(self,
+                                                              storage_mock,
+                                                              presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
-            no_of_seats=0
+            luggage_quantity=0
         )
         interactor = RideRequestInteractor(storage=storage_mock)
 
@@ -235,7 +248,9 @@ class TestRideRequest:
         presenter_mock.raise_exception_for_invalid_luggage_quantity.assert_not_called()
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_with_flexible_timings_false_and_create_ride_request(self, storage_mock, presenter_mock):
+    def test_with_flexible_timings_false_and_create_ride_request(self,
+                                                                 storage_mock,
+                                                                 presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             from_place="kurnool",
@@ -252,10 +267,13 @@ class TestRideRequest:
         )
 
         # Assert
-        storage_mock.create_ride_request.assert_called_once_with(ride_request_dto=ride_request_dto)
+        storage_mock.create_ride_request.assert_called_once_with(
+            ride_request_dto=ride_request_dto)
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_with_flexible_timings_true_and_create_ride_request(self, storage_mock, presenter_mock):
+    def test_with_flexible_timings_true_and_create_ride_request(self,
+                                                                storage_mock,
+                                                                presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             from_place="kurnool",
@@ -274,4 +292,5 @@ class TestRideRequest:
         )
 
         # Assert
-        storage_mock.create_ride_request.assert_called_once_with(ride_request_dto=ride_request_dto)
+        storage_mock.create_ride_request.assert_called_once_with(
+            ride_request_dto=ride_request_dto)

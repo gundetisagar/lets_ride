@@ -1,168 +1,481 @@
 {
-    "swagger": "2.0",
-    "host": "127.0.0.1:8080",
-    "basePath": "/api/lets_ride",
-    "info": {
-        "version": "1.0.0",
-        "title": "LET'S RIDE",
-       "description": "Let's Ride api specs"
-    },
-    "schemes": [
-        "https",
-        "http"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "securityDefinitions": {
-        "oauth": {
-            "tokenUrl": "http://auth.ibtspl.com/oauth2/",
-            "flow": "password",
-            "scopes": {
-                "read": "read users",
-                "write": "create users",
-                "update": "update users",
-                "delete": "delete users",
-                "superuser": "super user permission"
-            },
-            "type": "oauth2"
-        }
-    },
-    "paths": {
-        "/ride_request/v1/": {
-            "post": {
-                "operationId": "ride_request",
-                "summary": "ride request for user travelling",
-                "parameters": [{
-                    "$ref": "#/parameters/RideRequestParameter"
-                }],
-                "security": [{
-                    "oauth": [
-                        "read",
-                        "write",
-                        "update",
-                        "superuser"
-                    ]
-                }],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/SuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/InvalidNoOfSeatsAndLuggageQuantityResponse"
-                    }
-                }
-            }
-        }
-    },
-    "parameters": {
-        "RideRequestParameter": {
-            "name": "ride_request_parameters",
-            "in": "body",
-            "description": "Ride Request Details",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/RideRequestDefinition"
-            }
-        }
-    },
-    "responses": {
-        "SuccessResponse": {
-            "description": "Successfully your Ride Request Created"
-        },
-        "InvalidNoOfSeatsAndLuggageQuantityResponse": {
-            "description": "raise error when given no_of_seats or luggage_quantity is invalid",
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "type": "string"
-                    },
-                    "http_status_code": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "res_status": {
-                        "type": "string",
-                        "enum": [
-                            "InvalidToPlace",
-                            "InvalidDatetime",
-                            "InvalidEndDatetime",
-                            "InvalidNoOfSeats",
-                            "InvalidLuggageQuantity"
-                        ]
-                    }
-                },
-                "required": [
-                    "response",
-                    "http_status_code",
-                    "res_status"
-                ]
-            }
-        }
-    },
-    "definitions": {
-        "FromAndToPlacesWithTimings": {
-            "type": "object",
-            "properties": {
-                "from_place": {
-                    "type": "string"
-                },
-                "to_place": {
-                    "type": "string"
-                },
-                "date_time": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "flexible_timings": {
-                    "type": "boolean"
-                },
-                "start_date_time": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "end_date_time": {
-                    "type": "string",
-                    "format": "datetime"
-                }
-            },
-            "required": [
-                "from_place",
-                "to_place",
-                "flexible_timings"
-            ]
-        },
-        "RideRequest": {
-            "type": "object",
-            "properties": {
-                "no_of_seats": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "luggage_quantity": {
-                     "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "required": [
-                "no_of_seats",
-                "luggage_quantity"
-            ]
-        },
-        "RideRequestDefinition": {
-            "allOf":[
-                {
-                    "$ref": "#/definitions/FromAndToPlacesWithTimings"
-                },
-                {
-                    "$ref": "#/definitions/RideRequest"
-                }
-            ]
-
-        }
+  "swagger": "2.0",
+  "host": "127.0.0.1:8080",
+  "basePath": "/api/lets_ride",
+  "info": {
+    "version": "1.0.0",
+    "title": "LET'S RIDE",
+    "description": "Let's Ride api specs"
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "oauth": {
+      "tokenUrl": "http://auth.ibtspl.com/oauth2/",
+      "flow": "password",
+      "scopes": {
+        "read": "read users",
+        "write": "create users",
+        "update": "update users",
+        "delete": "delete users",
+        "superuser": "super user permission"
+      },
+      "type": "oauth2"
     }
+  },
+  "paths": {
+    "/ride_request/v1/": {
+      "post": {
+        "operationId": "ride_request",
+        "summary": "ride request for user travelling",
+        "parameters": [
+          {
+            "$ref": "#/parameters/RideRequestParameter"
+          }
+        ],
+        "security": [
+          {
+            "oauth": [
+              "read",
+              "write",
+              "update",
+              "superuser"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/InvalidRideRequestResponse"
+          }
+        }
+      }
+    },
+    "/share_ride/v1/": {
+      "post": {
+        "operationId": "share_ride",
+        "summary": "share ride for user travelling",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ShareRideParameter"
+          }
+        ],
+        "security": [
+          {
+            "oauth": [
+              "read",
+              "write",
+              "update",
+              "superuser"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/InvalidShareRideResponse"
+          }
+        }
+      }
+    },
+    "/asset_request/v1/": {
+      "post": {
+        "operationId": "asset_request",
+        "summary": "asset request for whom are in travelling",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AssetRequestParameter"
+          }
+        ],
+        "security": [
+          {
+            "oauth": [
+              "read",
+              "write",
+              "update",
+              "superuser"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/InvalidAssetRequestResponse"
+          }
+        }
+      }
+    },
+    "/share_travel_info/v1/": {
+      "post": {
+        "operationId": "share_travel_info",
+        "summary": "share travel info for whom are in travelling",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ShareTravelInfoParameter"
+          }
+        ],
+        "security": [
+          {
+            "oauth": [
+              "read",
+              "write",
+              "update",
+              "superuser"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/InvalidShareTravelInfoResponse"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "RideRequestParameter": {
+      "name": "ride_request_parameters",
+      "in": "body",
+      "description": "Ride Request Details",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RideRequestDefinition"
+      }
+    },
+    "ShareRideParameter": {
+      "name": "share_ride_parameters",
+      "in": "body",
+      "description": "Share Ride Details",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ShareRideDefinition"
+      }
+    },
+    "AssetRequestParameter": {
+      "name": "asset_request_parameters",
+      "in": "body",
+      "description": "Share Ride Details",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AssetRequestDefinition"
+      }
+    },
+    "ShareTravelInfoParameter": {
+      "name": "share_travel_info_parameters",
+      "in": "body",
+      "description": "Share Ride Details",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ShareTravelInfoDefinition"
+      }
+    }
+  },
+  "responses": {
+    "SuccessResponse": {
+      "description": "Successfully Created"
+    },
+    "InvalidRideRequestResponse": {
+      "description": "raise error when given invalid responses",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "http_status_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "res_status": {
+            "type": "string",
+            "enum": [
+              "InvalidToPlace",
+              "InvalidDatetime",
+              "InvalidEndDatetime",
+              "InvalidNoOfSeats",
+              "InvalidLuggageQuantity"
+            ]
+          }
+        },
+        "required": [
+          "response",
+          "http_status_code",
+          "res_status"
+        ]
+      }
+    },
+    "InvalidShareRideResponse": {
+      "description": "raise error when given invalid responses",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "http_status_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "res_status": {
+            "type": "string",
+            "enum": [
+              "InvalidToPlace",
+              "InvalidDatetime",
+              "InvalidEndDatetime",
+              "InvalidNoOfSeatsAvailable",
+              "InvalidAssetsQuantity"
+            ]
+          }
+        },
+        "required": [
+          "response",
+          "http_status_code",
+          "res_status"
+        ]
+      }
+    },
+    "InvalidAssetRequestResponse": {
+      "description": "raise error when given invalid responses",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "http_status_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "res_status": {
+            "type": "string",
+            "enum": [
+              "InvalidToPlace",
+              "InvalidDatetime",
+              "InvalidEndDatetime",
+              "InvalidNoOfAssets",
+              "InvalidOthersField"
+            ]
+          }
+        },
+        "required": [
+          "response",
+          "http_status_code",
+          "res_status"
+        ]
+      }
+    },
+    "InvalidShareTravelInfoResponse": {
+      "description": "raise error when given invalid responses",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "http_status_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "res_status": {
+            "type": "string",
+            "enum": [
+              "InvalidToPlace",
+              "InvalidDatetime",
+              "InvalidEndDatetime",
+              "InvalidAssetQuantity"
+            ]
+          }
+        },
+        "required": [
+          "response",
+          "http_status_code",
+          "res_status"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "FromAndToPlacesWithTimings": {
+      "type": "object",
+      "properties": {
+        "from_place": {
+          "type": "string"
+        },
+        "to_place": {
+          "type": "string"
+        },
+        "date_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "flexible_timings": {
+          "type": "boolean"
+        },
+        "start_date_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_date_time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from_place",
+        "to_place",
+        "flexible_timings"
+      ]
+    },
+    "RideRequest": {
+      "type": "object",
+      "properties": {
+        "no_of_seats": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "luggage_quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "no_of_seats",
+        "luggage_quantity"
+      ]
+    },
+    "RideRequestDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FromAndToPlacesWithTimings"
+        },
+        {
+          "$ref": "#/definitions/RideRequest"
+        }
+      ]
+    },
+    "ShareRide": {
+      "type": "object",
+      "properties": {
+        "no_of_seats_available": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "assets_quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "no_of_seats_available",
+        "assets_quantity"
+      ]
+    },
+    "ShareRideDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FromAndToPlacesWithTimings"
+        },
+        {
+          "$ref": "#/definitions/ShareRide"
+        }
+      ]
+    },
+    "AssetRequest": {
+      "type": "object",
+      "properties": {
+        "no_of_assets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asset_type": {
+          "type": "string",
+          "enum": [
+            "PARCEL",
+            "BAG",
+            "FURNITURE",
+            "OTHER"
+          ]
+        },
+        "other": {
+          "type": "string"
+        },
+        "asset_sensitivity": {
+          "type": "string",
+          "enum": [
+            "SENSITIVE",
+            "HIGHLY_SENSITIVE",
+            "ELECTRONIC"
+          ]
+        },
+        "whom_to_deliver": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "no_of_assets",
+        "asset_type",
+        "asset_sensitivity",
+        "whom_to_deliver"
+
+      ]
+    },
+    "AssetRequestDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FromAndToPlacesWithTimings"
+        },
+        {
+          "$ref": "#/definitions/AssetRequest"
+        }
+      ]
+    },
+    "ShareTravelInfo": {
+      "type": "object",
+      "properties": {
+        "travel_medium": {
+          "type": "string",
+          "enum": [
+            "BUS",
+            "CAR",
+            "FLIGHT"
+          ]
+        },
+        "assets_quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "travel_medium",
+        "assets_quantity"
+      ]
+    },
+     "ShareTravelInfoDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FromAndToPlacesWithTimings"
+        },
+        {
+          "$ref": "#/definitions/ShareTravelInfo"
+        }
+      ]
+    }
+  }
 }

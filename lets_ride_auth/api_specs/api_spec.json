@@ -98,8 +98,8 @@
                         "type": "string"
                     },
                     "expires_in": {
-                        "type": "integer",
-                        "format": "int64"
+                        "type": "string",
+                        "format": "date-time"
                     }
                 },
                 "required": [

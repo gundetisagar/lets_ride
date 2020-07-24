@@ -23,7 +23,10 @@ TEST_CASE = {
         "path_params": {},
         "query_params": {},
         "header_params": {},
-        "securities": {"oauth": {"tokenUrl": "http://auth.ibtspl.com/oauth2/", "flow": "password", "scopes": ["read", "write", "update"], "type": "oauth2"}},
+        "securities": {"oauth": {"tokenUrl": "http://auth.ibtspl.com/oauth2/",
+                                 "flow": "password",
+                                 "scopes": ["read", "write", "update"],
+                                 "type": "oauth2"}},
         "body": REQUEST_BODY,
     },
 }
@@ -42,6 +45,6 @@ class TestCase01RideRequestAPITestCase(CustomAPITestCase):
         )
 
     def test_case(self):
-        self.default_test_case() # Returns response object.
+        self.default_test_case()  # Returns response object.
         # Which can be used for further response object checks.
         # Add database state checks here.
