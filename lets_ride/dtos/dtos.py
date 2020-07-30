@@ -44,3 +44,15 @@ class AssetTransportRequestDTO:
     others: str
     asset_sensitivity: str
     whom_to_deliver: str
+
+@dataclasses.dataclass
+class ShareTravelInfoDTO:
+    user_id: int
+    from_place: str
+    to_place: str
+    date_time: datetime
+    flexible_timings: bool
+    start_date_time: datetime
+    end_date_time: datetime
+    travel_medium: str
+    assets_quantity: int
