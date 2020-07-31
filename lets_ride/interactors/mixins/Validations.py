@@ -14,7 +14,6 @@ class ValidationMixin:
 
     def validate_date_time(self, date_time: datetime.datetime):
         current_datetime = datetime.datetime.now()
-
         if current_datetime > date_time:
             from lets_ride.exceptions.exceptions import InvalidDatetime
             raise InvalidDatetime

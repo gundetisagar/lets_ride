@@ -1,5 +1,5 @@
 from lets_ride.models import ShareRide
-from lets_ride.storages.share_ride_presenter_implementation import \
+from lets_ride.storages.share_ride_storage_implementation import \
     ShareRideStorageImplementation
 import pytest
 from freezegun import freeze_time

@@ -1,6 +1,4 @@
 import dataclasses
-from typing import Optional
-
 import datetime
 
 

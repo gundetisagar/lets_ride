@@ -1,7 +1,9 @@
 import pytest
 from freezegun import freeze_time
 from unittest.mock import patch, Mock
+from datetime import datetime
 
+from lets_ride.constants.constants import DEFAULT_DATE_TIME_FORMAT
 from lets_ride.tests.factories.interactor_dtos import RideRequestDtoFactory
 from lets_ride.interactors.mixins.Validations import ValidationMixin
 from lets_ride.interactors.ride_request_interactor import RideRequestInteractor
@@ -32,12 +34,12 @@ class TestRideRequest:
         # Arrange
         ride_request_dto = RideRequestDtoFactory(from_place="kurnool",
                                                  to_place="kurnool")
-        interator = RideRequestInteractor(storage=storage_mock)
+        interactor = RideRequestInteractor(storage=storage_mock)
         mock_object = Mock()
         presenter_mock.raise_exception_for_from_and_to_place_are_same.return_value = mock_object
 
         # Act
-        response = interator.create_ride_request_wrapper(
+        response = interactor.create_ride_request_wrapper(
             ride_request_dto=ride_request_dto,
             presenter=presenter_mock
         )
@@ -54,12 +56,13 @@ class TestRideRequest:
         ride_request_dto = RideRequestDtoFactory(
             from_place="kurnool",
             to_place="hyd",
-            date_time="2020-07-22 11:00:00"
+            date_time=datetime.strptime("2020-08-22 00:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT)
         )
-        interator = RideRequestInteractor(storage=storage_mock)
+        interactor = RideRequestInteractor(storage=storage_mock)
 
         # Act
-        response = interator.create_ride_request_wrapper(
+        response = interactor.create_ride_request_wrapper(
             ride_request_dto=ride_request_dto,
             presenter=presenter_mock
         )
@@ -72,7 +75,8 @@ class TestRideRequest:
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=False,
-            date_time="2020-07-21 11:00:00"
+            date_time=datetime.strptime("2020-07-21 00:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT)
         )
         interactor = RideRequestInteractor(storage=storage_mock)
         mock_object = Mock()
@@ -94,7 +98,8 @@ class TestRideRequest:
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=False,
-            date_time="2020-07-22 01:00:00"
+            date_time=datetime.strptime("2020-07-25 00:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT)
         )
         interactor = RideRequestInteractor(storage=storage_mock)
 
@@ -112,8 +117,10 @@ class TestRideRequest:
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=True,
-            start_date_time="2020-07-22 12:00:00",
-            end_date_time="2020-07-22 11:00:00"
+            start_date_time=datetime.strptime("2020-07-22 00:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
+            end_date_time=datetime.strptime("2020-07-21 00:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT)
         )
 
         interactor = RideRequestInteractor(storage=storage_mock)
@@ -136,8 +143,10 @@ class TestRideRequest:
         # Arrange
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=True,
-            start_date_time="2020-07-22 12:00:00",
-            end_date_time="2020-07-22 13:00:00"
+            start_date_time=datetime.strptime("2020-07-22 12:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
+            end_date_time=datetime.strptime("2020-07-22 13:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT)
         )
         interactor = RideRequestInteractor(storage=storage_mock)
 
@@ -256,7 +265,8 @@ class TestRideRequest:
             from_place="kurnool",
             to_place="hyd",
             flexible_timings=False,
-            date_time="2020-07-22 05:00:00"
+            date_time=datetime.strptime("2020-07-22 05:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT)
         )
         interactor = RideRequestInteractor(storage=storage_mock)
 
@@ -280,8 +290,10 @@ class TestRideRequest:
             to_place="hyd",
             flexible_timings=True,
             date_time=None,
-            start_date_time="2020-07-22 01:00:00",
-            end_date_time="2020-07-22 05:00:00"
+            start_date_time=datetime.strptime("2020-07-22 01:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
+            end_date_time=datetime.strptime("2020-08-22 05:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT)
         )
         interactor = RideRequestInteractor(storage=storage_mock)
 

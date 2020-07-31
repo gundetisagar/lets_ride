@@ -5,7 +5,7 @@ from ...dtos.dtos import ShareRideDTO
 from ...interactors.share_ride_interactor import ShareRideInteractor
 from ...presenters.share_ride_presenter_implementation import \
     ShareRidePresenterImplementation
-from ...storages.share_ride_presenter_implementation import \
+from ...storages.share_ride_storage_implementation import \
     ShareRideStorageImplementation
 
 

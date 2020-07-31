@@ -13,7 +13,7 @@ class ShareTravelInfoInteractor(ValidationMixin):
     def __init__(self, storage: ShareTravelInfoStorageInterface):
         self.storage = storage
 
-    def create_ride_request_wrapper(self,
+    def create_share_travel_info_wrapper(self,
                                     presenter: ShareTravelInfoPresenterInterface,
                                     share_travel_info_dto: ShareTravelInfoDTO):
         try:

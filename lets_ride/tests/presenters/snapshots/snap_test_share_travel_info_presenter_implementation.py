@@ -25,12 +25,6 @@ snapshots['test_raise_exception_for_invalid_end_datetime response'] = {
     'response': 'your end datetime is less than start datetime, please enter valid end datetime'
 }
 
-snapshots['test_raise_exception_for_invalid_no_of_seats response'] = {
-    'http_status_code': 400,
-    'res_status': 'InvalidNoOfSeatsAvailable',
-    'response': 'the no of seats available should be positive, please enter valid no of seats available'
-}
-
 snapshots['test_raise_exception_for_invalid_assets_quantity response'] = {
     'http_status_code': 400,
     'res_status': 'InvalidAssetsQuantity',

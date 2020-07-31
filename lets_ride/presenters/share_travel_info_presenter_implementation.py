@@ -1,13 +1,12 @@
-from lets_ride.interactors.presenters.asset_transport_request_presenter_interface \
-    import AssetTransportRequestPresenterInterface
-import json
+from lets_ride.interactors.presenters.share_travel_info_presenter_interface \
+    import ShareTravelInfoPresenterInterface
 
 from django.http import response
 from django_swagger_utils.utils.http_response_mixin import HTTPResponseMixin
 
 
-class AssetTransportRequestPresenterImplementation(
-    AssetTransportRequestPresenterInterface, HTTPResponseMixin):
+class ShareTravelInfoPresenterImplementation(
+    ShareTravelInfoPresenterInterface, HTTPResponseMixin):
 
     def raise_exception_for_from_and_to_place_are_same(
             self) -> response.HttpResponse:
@@ -17,7 +16,8 @@ class AssetTransportRequestPresenterImplementation(
             "http_status_code": 400,
             "res_status": INVALID_TO_PLACE[1]
         }
-        return self.prepare_400_bad_request_response(response_dict=response_dict)
+        return self.prepare_400_bad_request_response(
+            response_dict=response_dict)
 
     def raise_exception_for_invalid_date_time(self) -> response.HttpResponse:
         from lets_ride.constants.exception_messages import INVALID_DATE_TIME
@@ -26,7 +26,8 @@ class AssetTransportRequestPresenterImplementation(
             "http_status_code": 400,
             "res_status": INVALID_DATE_TIME[1]
         }
-        return self.prepare_400_bad_request_response(response_dict=response_dict)
+        return self.prepare_400_bad_request_response(
+            response_dict=response_dict)
 
     def raise_exception_for_invalid_end_datetime(self) -> response.HttpResponse:
         from lets_ride.constants.exception_messages import INVALID_END_DATETIME
@@ -35,24 +36,17 @@ class AssetTransportRequestPresenterImplementation(
             "http_status_code": 400,
             "res_status": INVALID_END_DATETIME[1]
         }
-        return self.prepare_400_bad_request_response(response_dict=response_dict)
+        return self.prepare_400_bad_request_response(
+            response_dict=response_dict)
 
-    def raise_exception_for_invalid_no_of_assets(self) -> response.HttpResponse:
-        from lets_ride.constants.exception_messages import INVALID_NO_OF_ASSETS
-        response_dict = {
-            "response": INVALID_NO_OF_ASSETS[0],
-            "http_status_code": 400,
-            "res_status": INVALID_NO_OF_ASSETS[1]
-        }
-        return self.prepare_400_bad_request_response(response_dict=response_dict)
-
-    def raise_exception_for_invalid_whom_to_deliver(
+    def raise_exception_for_invalid_assets_quantity(
             self) -> response.HttpResponse:
         from lets_ride.constants.exception_messages import \
-            INVALID_WHOM_TO_DELIVER
+            INVALID_ASSETS_QUANTITY
         response_dict = {
-            "response": INVALID_WHOM_TO_DELIVER[0],
+            "response": INVALID_ASSETS_QUANTITY[0],
             "http_status_code": 400,
-            "res_status": INVALID_WHOM_TO_DELIVER[1]
+            "res_status": INVALID_ASSETS_QUANTITY[1]
         }
-        return self.prepare_400_bad_request_response(response_dict=response_dict)
+        return self.prepare_400_bad_request_response(
+            response_dict=response_dict)

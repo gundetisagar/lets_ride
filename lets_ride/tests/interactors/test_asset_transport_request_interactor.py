@@ -1,7 +1,9 @@
+from datetime import datetime
 import pytest
 from freezegun import freeze_time
 from unittest.mock import patch, Mock
 
+from lets_ride.constants.constants import DEFAULT_DATE_TIME_FORMAT
 from lets_ride.tests.factories.interactor_dtos import \
     AssetTransportRequestDtoFactory
 from lets_ride.interactors.mixins.Validations import ValidationMixin
@@ -60,7 +62,8 @@ class TestAssetTransportRequest:
         asset_transport_request_dto = AssetTransportRequestDtoFactory(
             from_place="kurnool",
             to_place="hyd",
-            date_time="2020-07-22 11:00:00"
+            date_time=datetime.strptime("2020-07-22 01:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
         )
         interactor = AssetTransportRequestInteractor(storage=storage_mock)
 
@@ -79,7 +82,8 @@ class TestAssetTransportRequest:
         # Arrange
         asset_transport_request_dto = AssetTransportRequestDtoFactory(
             flexible_timings=False,
-            date_time="2020-07-21 11:00:00"
+            date_time=datetime.strptime("2020-07-21 11:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
         )
         interactor = AssetTransportRequestInteractor(storage=storage_mock)
         mock_object = Mock()
@@ -101,7 +105,8 @@ class TestAssetTransportRequest:
         # Arrange
         asset_transport_request_dto = AssetTransportRequestDtoFactory(
             flexible_timings=False,
-            date_time="2020-07-22 01:00:00"
+            date_time=datetime.strptime("2020-07-22 01:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
         )
         interactor = AssetTransportRequestInteractor(storage=storage_mock)
 
@@ -119,8 +124,10 @@ class TestAssetTransportRequest:
         # Arrange
         asset_transport_request_dto = AssetTransportRequestDtoFactory(
             flexible_timings=True,
-            start_date_time="2020-07-22 12:00:00",
-            end_date_time="2020-07-22 11:00:00"
+            start_date_time=datetime.strptime("2020-07-22 12:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
+            end_date_time=datetime.strptime("2020-07-22 11:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
         )
 
         interactor = AssetTransportRequestInteractor(storage=storage_mock)
@@ -144,8 +151,10 @@ class TestAssetTransportRequest:
         # Arrange
         asset_transport_request_dto = AssetTransportRequestDtoFactory(
             flexible_timings=True,
-            start_date_time="2020-07-22 12:00:00",
-            end_date_time="2020-07-22 13:00:00"
+            start_date_time=datetime.strptime("2020-07-22 12:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
+            end_date_time=datetime.strptime("2020-07-22 13:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
         )
         interactor = AssetTransportRequestInteractor(storage=storage_mock)
 
@@ -294,7 +303,8 @@ class TestAssetTransportRequest:
             from_place="kurnool",
             to_place="hyd",
             flexible_timings=False,
-            date_time="2020-07-22 05:00:00",
+            date_time=datetime.strptime("2020-07-22 05:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
 
         )
         interactor = AssetTransportRequestInteractor(storage=storage_mock)
@@ -319,8 +329,10 @@ class TestAssetTransportRequest:
             to_place="hyd",
             flexible_timings=True,
             date_time=None,
-            start_date_time="2020-07-22 01:00:00",
-            end_date_time="2020-07-22 05:00:00"
+            start_date_time=datetime.strptime("2020-07-22 01:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
+            end_date_time=datetime.strptime("2020-07-22 05:00:00",
+                                        DEFAULT_DATE_TIME_FORMAT),
         )
         interactor = AssetTransportRequestInteractor(storage=storage_mock)
 

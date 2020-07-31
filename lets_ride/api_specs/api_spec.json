@@ -300,7 +300,7 @@
               "InvalidToPlace",
               "InvalidDatetime",
               "InvalidEndDatetime",
-              "InvalidAssetQuantity"
+              "InvalidAssetsQuantity"
             ]
           }
         },

@@ -39,7 +39,7 @@ INVALID_ASSETS_QUANTITY = (
 )
 
 INVALID_NO_OF_ASSETS = (
-    "the no of assets should be positive, please enter valid no of seats",
+    "the no of assets should be positive, please enter valid no of assets",
     "InvalidNoOfAssets"
 )
 

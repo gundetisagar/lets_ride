@@ -28,7 +28,7 @@ snapshots['test_raise_exception_for_invalid_end_datetime response'] = {
 snapshots['test_raise_exception_for_invalid_no_of_assets response'] = {
     'http_status_code': 400,
     'res_status': 'InvalidNoOfAssets',
-    'response': 'the no of assets should be positive, please enter valid no of seats'
+    'response': 'the no of assets should be positive, please enter valid no of assets'
 }
 
 snapshots['test_raise_exception_for_invalid_whom_to_deliver response'] = {
