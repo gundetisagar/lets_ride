@@ -64,6 +64,37 @@ assets_quantity
 travel medium must be enum
 assets_quantity not less than zero (InvalidAssetQuantity)
 
+--------------my requests--ride--------->
+from_place
+to_place
+date_time
+flexible_timings
+start_date_time
+end_date_time
+no_of_people
+luggage_quantity
+accepted_person_details
+status
+total_records
+
+-----------my requests--asset--------->
+from_place
+to_place
+date_time
+flexible_timings
+start_date_time
+end_date_time
+no_of_people
+asset_type
+asset_sensitivity
+whom_to_deliver
+accepted_person_details
+status
+total_records
+
+
+
+
 
 
 

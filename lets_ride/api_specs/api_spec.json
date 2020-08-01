@@ -52,11 +52,37 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/responses/SuccessResponse"
+          "201": {
+            "$ref": "#/responses/CreateResponse"
           },
           "400": {
             "$ref": "#/responses/InvalidRideRequestResponse"
+          }
+        }
+      },
+      "get": {
+        "operationId": "my_requests_ride",
+        "summary": "my ride requests details",
+        "parameters": [
+          {
+            "$ref": "#/parameters/OffsetParameter"
+          },
+          {
+            "$ref": "#/parameters/LimitParameter"
+          },
+          {
+            "$ref": "#/parameters/SortParameter"
+          },
+          {
+            "$ref": "#/parameters/SortByParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/MyRideRequestsResponse"
           }
         }
       }
@@ -81,8 +107,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/responses/SuccessResponse"
+          "201": {
+            "$ref": "#/responses/CreateResponse"
           },
           "400": {
             "$ref": "#/responses/InvalidShareRideResponse"
@@ -110,11 +136,37 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/responses/SuccessResponse"
+          "201": {
+            "$ref": "#/responses/CreateResponse"
           },
           "400": {
             "$ref": "#/responses/InvalidAssetTransportRequestResponse"
+          }
+        }
+      },
+      "get": {
+        "operationId": "my_requests_assets",
+        "summary": "my asset requests details",
+        "parameters": [
+          {
+            "$ref": "#/parameters/OffsetParameter"
+          },
+          {
+            "$ref": "#/parameters/LimitParameter"
+          },
+          {
+            "$ref": "#/parameters/SortParameter"
+          },
+          {
+            "$ref": "#/parameters/SortByParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/MyAssetRequestsResponse"
           }
         }
       }
@@ -139,8 +191,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/responses/SuccessResponse"
+          "201": {
+            "$ref": "#/responses/CreateResponse"
           },
           "400": {
             "$ref": "#/responses/InvalidShareTravelInfoResponse"
@@ -185,10 +237,60 @@
       "schema": {
         "$ref": "#/definitions/ShareTravelInfoDefinition"
       }
+    },
+    "OffsetParameter": {
+      "name": "offset query parameter",
+      "in": "query",
+      "description": "enter valid offset value",
+      "required": true,
+      "type": "number"
+    },
+    "LimitParameter": {
+      "name": "Limit query parameter",
+      "in": "query",
+      "description": "enter valid limit value",
+      "required": true,
+      "type": "number"
+    },
+    "SortParameter": {
+      "name": "sort fields",
+      "in": "query",
+      "description": "give valid field for sort",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "published_at",
+        "from_place",
+        "to_place"
+      ]
+    },
+    "SortByParameter": {
+      "name": "sort by fields",
+      "in": "query",
+      "description": "give valid sorting order",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "DESCENDING",
+        "ASCENDING"
+      ]
+    },
+    "FilterBy": {
+      "name": "filter on status",
+      "in": "query",
+      "description": "filter on status",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "ALL",
+        "PENDING",
+        "EXPIRED",
+        "CONFIRM"
+      ]
     }
   },
   "responses": {
-    "SuccessResponse": {
+    "CreateResponse": {
       "description": "Successfully Created"
     },
     "InvalidRideRequestResponse": {
@@ -309,6 +411,18 @@
           "http_status_code",
           "res_status"
         ]
+      }
+    },
+    "MyRideRequestsResponse": {
+      "description": "returns person's ride requests",
+      "schema": {
+        "$ref": "#/definitions/MyRequestsRideDefinition"
+      }
+    },
+    "MyAssetRequestsResponse": {
+      "description": "returns person's asset requests",
+      "schema": {
+        "$ref": "#/definitions/MyRequestsAssetDefinition"
       }
     }
   },
@@ -434,7 +548,6 @@
         "asset_type",
         "asset_sensitivity",
         "whom_to_deliver"
-
       ]
     },
     "AssetTransportRequestDefinition": {
@@ -468,13 +581,68 @@
         "assets_quantity"
       ]
     },
-     "ShareTravelInfoDefinition": {
+    "ShareTravelInfoDefinition": {
       "allOf": [
         {
           "$ref": "#/definitions/FromAndToPlacesWithTimings"
         },
         {
           "$ref": "#/definitions/ShareTravelInfo"
+        }
+      ]
+    },
+    "UserProfileDefinition": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mobile_number": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "name",
+        "mobile_number"
+      ]
+    },
+    "MyRequestsRide": {
+      "type": "object",
+      "properties": {
+        "accepted_person": {
+          "$ref": "#/definitions/UserProfileDefinition"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "CONFIRM",
+            "EXPIRED"
+          ]
+        }
+      }
+    },
+    "MyRequestsRideDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RideRequestDefinition"
+        },
+        {
+          "$ref": "#/definitions/MyRequestsRide"
+        }
+      ]
+    },
+    "MyRequestsAssetDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetTransportRequestDefinition"
+        },
+        {
+          "$ref": "#/definitions/MyRequestsRide"
         }
       ]
     }

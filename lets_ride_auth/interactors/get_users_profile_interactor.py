@@ -13,12 +13,12 @@ class GetUsersProfileInteractor:
         self.user_storage = user_storage
 
     def get_users_profile_wrapper(self, user_ids: List[int],
-                                  presenter: PresenterInterface) -> List[UserProfileDTO]:
+                                  presenter: PresenterInterface) -> List[
+        UserProfileDTO]:
         try:
             return self._get_users_profile(user_ids=user_ids)
         except UserDoesNotExist:
             pass
-
 
 #
 # class GetUserDetailsInteractor:
