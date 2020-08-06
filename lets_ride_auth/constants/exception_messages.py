@@ -1,10 +1,10 @@
 
 INVALID_USERNAME = (
     "Invalid username, try with valid username",
-    "INVALIDUSERNAME"
+    "INVALID_USERNAME"
 )
 
 INVALID_PASSWORD = (
     "Invalid password, try with valid password",
-    "INVALIDPASSWORD"
+    "INVALID_PASSWORD"
 )

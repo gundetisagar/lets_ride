@@ -3,6 +3,8 @@ from abc import abstractmethod
 
 from django.http import HttpResponse
 
+from lets_ride.interactors.dtos import MyRideRequestWithUserProfileDTO
+
 
 class RideRequestPresenterInterface(ABC):
 
@@ -24,4 +26,11 @@ class RideRequestPresenterInterface(ABC):
 
     @abstractmethod
     def raise_exception_for_invalid_luggage_quantity(self) -> HttpResponse:
+        pass
+
+    @abstractmethod
+    def my_ride_requests_response(self,
+                                  my_ride_requests_with_user_profile_dto: \
+                                          MyRideRequestWithUserProfileDTO) \
+            -> HttpResponse:
         pass

@@ -10,8 +10,6 @@ from ...storages.user_storage_implementation import UserStorageImplementation
 
 @validate_decorator(validator_class=ValidatorClass)
 def api_wrapper(*args, **kwargs):
-    print("3"*100)
-
     request_data = kwargs['request_data']
 
     username = request_data['username']

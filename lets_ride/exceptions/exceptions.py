@@ -48,3 +48,11 @@ class InvalidOthersField(Exception):
 
 class InvalidWhomToDeliver(Exception):
     pass
+
+
+class validateOffsetValue(Exception):
+    pass
+
+
+class InvalidLimitValue(Exception):
+    pass

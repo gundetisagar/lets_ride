@@ -32,3 +32,13 @@ class ValidationMixin:
         if start_date_time > end_date_time:
             from lets_ride.exceptions.exceptions import InvalidEndDatetime
             raise InvalidEndDatetime
+
+    def validate_offset_value(self, offset: int):
+        if offset < 0:
+            from lets_ride.exceptions.exceptions import validateOffsetValue
+            raise validateOffsetValue
+
+    def validate_limit_value(self, limit: int):
+        if limit <= 0:
+            from lets_ride.exceptions.exceptions import InvalidLimitValue
+            raise InvalidLimitValue

@@ -13,4 +13,5 @@ class UserAuthTokensDto:
 class UserProfileDTO:
     user_id: int
     username: str
-    is_admin: bool
+    name: str
+    mobile_number: int

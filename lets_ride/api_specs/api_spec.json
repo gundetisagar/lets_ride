@@ -61,7 +61,7 @@
         }
       },
       "get": {
-        "operationId": "my_requests_ride",
+        "operationId": "my_ride_requests",
         "summary": "my ride requests details",
         "parameters": [
           {
@@ -416,13 +416,19 @@
     "MyRideRequestsResponse": {
       "description": "returns person's ride requests",
       "schema": {
-        "$ref": "#/definitions/MyRequestsRideDefinition"
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MyRequestsRideDefinition"
+        }
       }
     },
     "MyAssetRequestsResponse": {
       "description": "returns person's asset requests",
       "schema": {
-        "$ref": "#/definitions/MyRequestsAssetDefinition"
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MyRequestsAssetDefinition"
+        }
       }
     }
   },
@@ -594,6 +600,10 @@
     "UserProfileDefinition": {
       "type": "object",
       "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int32"
+        },
         "username": {
           "type": "string"
         },

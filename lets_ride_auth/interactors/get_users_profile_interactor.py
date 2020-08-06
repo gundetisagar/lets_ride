@@ -12,20 +12,13 @@ class GetUsersProfileInteractor:
     def __init__(self, user_storage: UserStorageInterface):
         self.user_storage = user_storage
 
-    def get_users_profile_wrapper(self, user_ids: List[int],
-                                  presenter: PresenterInterface) -> List[
-        UserProfileDTO]:
-        try:
-            return self._get_users_profile(user_ids=user_ids)
-        except UserDoesNotExist:
-            pass
+    # def get_users_profile(self, user_ids: List[int],
+    #                               presenter: PresenterInterface) -> List[
+    #     UserProfileDTO]:
+    #     user_dtos = self.get_users_profile(user_ids=user_ids)
+    #     return presenter.get_users_profile_response(user_dtos)
 
-#
-# class GetUserDetailsInteractor:
-#
-#     def __init__(self, storage: StorageInterface):
-#         self.storage = storage
-#
-#     def get_user_details_dtos(self, user_ids: List[int]) -> List[UserDTO]:
-#         user_dtos = self.storage.get_user_details_dtos(user_ids=user_ids)
-#         return user_dtos
+    def get_users_profile_dtos(self, user_ids: List[int]) -> List[UserProfileDTO]:
+        user_dtos = self.user_storage.get_users_profile_dtos(
+            user_ids=user_ids)
+        return user_dtos

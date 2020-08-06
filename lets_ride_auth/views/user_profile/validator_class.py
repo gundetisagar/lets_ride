@@ -6,6 +6,7 @@ class ValidatorClass(ValidatorAbstractClass):
     def __init__(self, *args, **kwargs):
         self.request_data = kwargs['request_data']
         self.user = kwargs['user']
+        self.user_dto = kwargs['user_dto']
         self.access_token = kwargs['access_token']
 
     def sample_validation(self):

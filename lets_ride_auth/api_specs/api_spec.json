@@ -51,15 +51,13 @@
                 }
             }
         },
-        "/get_profile/v1/": {
+        "/user_profile/v1/": {
             "get": {
-                "operationId": "get_profile",
+                "operationId": "user_profile",
                 "summary": "User Details",
                 "security": [{
                     "oauth": [
-                        "read",
-                        "write",
-                        "update"
+                        "read"
                     ]
                 }],
                 "responses": {
@@ -188,6 +186,10 @@
         "UserProfile": {
             "type": "object",
             "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "username": {
                     "type": "string"
                 },
@@ -200,6 +202,7 @@
                 }
             },
             "required": [
+                "user_id",
                 "username",
                 "name",
                 "mobile_number"

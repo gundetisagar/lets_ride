@@ -28,15 +28,16 @@ class TestRideRequest:
         return presenter
 
     @freeze_time("2020-07-22 00:00:00")
-    def test_ride_requset_with_from_and_to_places_same_raises_exception(self,
-                                                                        storage_mock,
-                                                                        presenter_mock):
+    def test_ride_requeset_with_from_and_to_places_same_raises_exception(self,
+                                                                         storage_mock,
+                                                                         presenter_mock):
         # Arrange
         ride_request_dto = RideRequestDtoFactory(from_place="kurnool",
                                                  to_place="kurnool")
         interactor = RideRequestInteractor(storage=storage_mock)
         mock_object = Mock()
-        presenter_mock.raise_exception_for_from_and_to_place_are_same.return_value = mock_object
+        presenter_mock.raise_exception_for_from_and_to_place_are_same. \
+            return_value = mock_object
 
         # Act
         response = interactor.create_ride_request_wrapper(
@@ -46,7 +47,8 @@ class TestRideRequest:
 
         # Assert
         assert response == mock_object
-        presenter_mock.raise_exception_for_from_and_to_place_are_same.assert_called_once()
+        presenter_mock.raise_exception_for_from_and_to_place_are_same. \
+            assert_called_once()
 
     @freeze_time("2020-07-22 00:00:00")
     def test_ride_requset_with_from_and_to_places_with_different_places(self,
@@ -67,7 +69,8 @@ class TestRideRequest:
             presenter=presenter_mock
         )
         # Assert
-        presenter_mock.raise_exception_for_from_and_to_place_are_same.assert_not_called()
+        presenter_mock.raise_exception_for_from_and_to_place_are_same. \
+            assert_not_called()
 
     @freeze_time("2020-07-22 00:00:00")
     def test_date_time_is_in_past_raise_exception(self, storage_mock,
@@ -118,9 +121,9 @@ class TestRideRequest:
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=True,
             start_date_time=datetime.strptime("2020-07-22 00:00:00",
-                                        DEFAULT_DATE_TIME_FORMAT),
+                                              DEFAULT_DATE_TIME_FORMAT),
             end_date_time=datetime.strptime("2020-07-21 00:00:00",
-                                        DEFAULT_DATE_TIME_FORMAT)
+                                            DEFAULT_DATE_TIME_FORMAT)
         )
 
         interactor = RideRequestInteractor(storage=storage_mock)
@@ -144,9 +147,9 @@ class TestRideRequest:
         ride_request_dto = RideRequestDtoFactory(
             flexible_timings=True,
             start_date_time=datetime.strptime("2020-07-22 12:00:00",
-                                        DEFAULT_DATE_TIME_FORMAT),
+                                              DEFAULT_DATE_TIME_FORMAT),
             end_date_time=datetime.strptime("2020-07-22 13:00:00",
-                                        DEFAULT_DATE_TIME_FORMAT)
+                                            DEFAULT_DATE_TIME_FORMAT)
         )
         interactor = RideRequestInteractor(storage=storage_mock)
 
@@ -291,9 +294,9 @@ class TestRideRequest:
             flexible_timings=True,
             date_time=None,
             start_date_time=datetime.strptime("2020-07-22 01:00:00",
-                                        DEFAULT_DATE_TIME_FORMAT),
+                                              DEFAULT_DATE_TIME_FORMAT),
             end_date_time=datetime.strptime("2020-08-22 05:00:00",
-                                        DEFAULT_DATE_TIME_FORMAT)
+                                            DEFAULT_DATE_TIME_FORMAT)
         )
         interactor = RideRequestInteractor(storage=storage_mock)
 
