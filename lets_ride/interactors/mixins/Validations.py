@@ -35,8 +35,8 @@ class ValidationMixin:
 
     def validate_offset_value(self, offset: int):
         if offset < 0:
-            from lets_ride.exceptions.exceptions import validateOffsetValue
-            raise validateOffsetValue
+            from lets_ride.exceptions.exceptions import InvalidOffsetValue
+            raise InvalidOffsetValue
 
     def validate_limit_value(self, limit: int):
         if limit <= 0:

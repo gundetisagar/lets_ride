@@ -1,7 +1,7 @@
 from lets_ride.dtos.dtos import RideRequestDTO
 from lets_ride.exceptions.exceptions import InvalidToPlace, InvalidDatetime, \
     InvalidEndDatetime, InvalidNoOfSeats, \
-    InvalidLuggageQuantity
+    InvalidLuggageQuantity, InvalidOffsetValue, InvalidLimitValue
 from lets_ride.interactors.dtos import MyRideRequestsQueryDTO
 from lets_ride.interactors.mixins.Validations import ValidationMixin
 from lets_ride.interactors.presenters.ride_request_presenter_interface import \
@@ -67,18 +67,26 @@ class RideRequestInteractor(ValidationMixin):
             raise InvalidLuggageQuantity
 
     def get_my_ride_requests_wrapper(self,
-                                      my_ride_requests_query_dto: MyRideRequestsQueryDTO,
-                                      presenter: RideRequestPresenterInterface):
-        my_ride_requests_with_user_profile_dto = self._get_my_ride_requests(
-            my_ride_requests_query_dto=my_ride_requests_query_dto
-        )
+                                     my_ride_requests_query_dto: MyRideRequestsQueryDTO,
+                                     presenter: RideRequestPresenterInterface):
+        try:
+            my_ride_requests_with_user_profile_dto = self.get_my_ride_requests(
+                my_ride_requests_query_dto=my_ride_requests_query_dto
+            )
+        except InvalidOffsetValue:
+            return presenter.raise_exception_for_invalid_offset_value()
+        except InvalidLimitValue:
+            return presenter.raise_exception_for_invalid_limit_value()
+
         return presenter.my_ride_requests_response(
             my_ride_requests_with_user_profile_dto=my_ride_requests_with_user_profile_dto)
 
     def get_my_ride_requests(self,
                              my_ride_requests_query_dto: MyRideRequestsQueryDTO):
-        self.validate_offset_value(my_ride_requests_query_dto.offset)
-        self.validate_limit_value(my_ride_requests_query_dto.limit)
+        self.validate_offset_value(
+            offset=my_ride_requests_query_dto.offset)
+        self.validate_limit_value(limit=my_ride_requests_query_dto.limit)
+
         ride_request_dtos = self.storage.get_my_ride_requests(
             my_ride_requests_query_dto=my_ride_requests_query_dto)
         list_of_user_ids = []
@@ -97,5 +105,3 @@ class RideRequestInteractor(ValidationMixin):
             user_profile_dtos=user_profile_dtos
         )
         return my_ride_requests_with_user_profile_dto
-
-

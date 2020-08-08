@@ -32,3 +32,9 @@ class TravelMediumTypes(BaseEnumClass, enum.Enum):
     BUS = "BUS"
     FLIGHT = "FLIGHT"
 
+
+class RideRequestStatusTypes(BaseEnumClass, enum.Enum):
+    ALL = "ALL"
+    PENDING = "PENDING"
+    CONFIRM = "CONFIRM"
+    EXPIRED = "EXPIRED"

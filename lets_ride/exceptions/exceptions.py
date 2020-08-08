@@ -50,7 +50,7 @@ class InvalidWhomToDeliver(Exception):
     pass
 
 
-class validateOffsetValue(Exception):
+class InvalidOffsetValue(Exception):
     pass
 
 

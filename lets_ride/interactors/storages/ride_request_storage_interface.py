@@ -3,7 +3,8 @@ from abc import abstractmethod
 from typing import List
 
 from lets_ride.dtos.dtos import RideRequestDTO
-from lets_ride.interactors.dtos import MyRideRequestsQueryDTO
+from lets_ride.interactors.dtos import MyRideRequestsQueryDTO, \
+    MyRideRequestWithUserProfileDTO
 from lets_ride.interactors.dtos import MyRideRequestDTO
 
 
@@ -16,5 +17,5 @@ class RideRequestStorageInterface(ABC):
     @abstractmethod
     def get_my_ride_requests(self,
                              my_ride_requests_query_dto: MyRideRequestsQueryDTO) -> \
-    List[MyRideRequestDTO]:
+    List[MyRideRequestWithUserProfileDTO]:
         pass

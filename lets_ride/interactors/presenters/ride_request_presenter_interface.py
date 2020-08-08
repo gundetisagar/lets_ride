@@ -34,3 +34,11 @@ class RideRequestPresenterInterface(ABC):
                                           MyRideRequestWithUserProfileDTO) \
             -> HttpResponse:
         pass
+
+    @abstractmethod
+    def raise_exception_for_invalid_offset_value(self) -> HttpResponse:
+        pass
+
+    @abstractmethod
+    def raise_exception_for_invalid_limit_value(self) -> HttpResponse:
+        pass
